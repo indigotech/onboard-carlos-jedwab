@@ -1,3 +1,10 @@
+.LoginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
 .TextLabel {
   display: flex;
   padding: 10px;
