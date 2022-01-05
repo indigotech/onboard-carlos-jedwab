@@ -2,7 +2,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  text-align: center;
+}
+
+.LoginBox__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
 }
 
 .TextLabel {
@@ -38,7 +44,6 @@
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 10px;
 }
 
 .TextInput__input {
@@ -49,7 +54,6 @@
 
 .ButtonInput {
   display: flex;
-  padding: 10px;
 }
 
 .ButtonInput__button {

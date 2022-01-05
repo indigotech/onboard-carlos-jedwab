@@ -34,12 +34,17 @@ export const LoginBox = () => {
 
   return (
     <div className='LoginBox'>
-      <TextLabel type='header'>Bem-vindo(a) à Taqtile!</TextLabel>
-      <TextInput label='E-mail' value={email} onChange={onChangeEmail} />
-      <TextInput label='Senha' value={password} onChange={onChangePassword} />
-      {emailError !== '' && <TextLabel type='error'>{emailError}</TextLabel>}
-      {passwordError !== '' && <TextLabel type='error'>{passwordError}</TextLabel>}
-      <ButtonInput label='Entrar' onClick={onSubmit} />
+      <div className='LoginBox__content'>
+        <TextLabel type='header'>Bem-vindo(a) à Taqtile!</TextLabel>
+      </div>
+
+      <div className='LoginBox__content'>
+        <TextInput label='E-mail' value={email} onChange={onChangeEmail} />
+        <TextInput label='Senha' value={password} onChange={onChangePassword} />
+        {emailError !== '' && <TextLabel type='error'>{emailError}</TextLabel>}
+        {passwordError !== '' && <TextLabel type='error'>{passwordError}</TextLabel>}
+        <ButtonInput label='Entrar' onClick={onSubmit} />
+      </div>
     </div>
   );
 };
