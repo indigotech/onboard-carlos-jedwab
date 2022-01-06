@@ -19,6 +19,7 @@ export const LoginPage = () => {
   const [internalError, setInternalError] = React.useState('');
 
   const loginTranslations = translations.pt.login;
+  const [isLoading, setIsLoading] = React.useState(false);
 
   const navigate = useNavigate();
 
@@ -39,24 +40,25 @@ export const LoginPage = () => {
     return emailValidation === '' && passwordValidation === '';
   };
 
+  const tryLogin = async (email: string, password: string) => {
+    setIsLoading(true);
+    await loginUser(email, password)
+      .then((result) => {
+        const token = result.data.login.token;
+        window.localStorage.setItem('token', token);
+        navigate('/front_page');
+      })
+      .catch((error) => {
+        const message = error.message || translations.pt.login.error.invalidCredentials;
+        setInternalError(message);
+      });
+    setIsLoading(false);
+  };
+
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validate(email, password)) {
-      loginUser(email, password)
-        .then((result) => {
-          const token = result.data.login.token;
-          window.localStorage.setItem('token', token);
-          navigate('/front_page');
-        })
-        .catch((error) => {
-          error.graphQLErrors.forEach((error: { code: number; message: string }) => {
-            if (error.code === 401) {
-              setInternalError(loginTranslations.error.invalidCredentials);
-            } else {
-              setInternalError(error.message);
-            }
-          });
-        });
+      tryLogin(email, password);
     }
   };
 
@@ -74,7 +76,7 @@ export const LoginPage = () => {
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
         {internalError !== '' && <Text type='error'>{internalError}</Text>}
 
-        <ButtonInput label={translations.pt.login.submit} type='submit' />
+        <ButtonInput label={translations.pt.login.submit} type='submit' isLoading={isLoading} />
       </form>
     </div>
   );
