@@ -21,7 +21,9 @@ export const ButtonInput = (props: ButtonInputProps) => {
             src='http://cdn.onlinewebfonts.com/svg/img_1585.png'
           />
         )}
-        <Text type='button'>{props.label}</Text>
+        <div className='ButtonInput__label'>
+          <Text type='button'>{props.label}</Text>
+        </div>
       </button>
     </div>
   );

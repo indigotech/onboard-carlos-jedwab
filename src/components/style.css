@@ -3,7 +3,7 @@
 }
 
 .TextLabel__label {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   color: rgb(87, 87, 87);
 }
@@ -15,7 +15,7 @@
 }
 
 .TextLabel__button {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: bold;
   color: rgb(255, 255, 255);
   margin: 5px;
@@ -28,26 +28,33 @@
 }
 
 .TextInput {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  width: 100%;
 }
 
 .TextInput__input {
-  font-size: 12px;
+  font-size: 16px;
   font-weight: normal;
   color: #000;
+  width: 100%;
 }
 
 .ButtonInput {
-  display: flex;
+  width: 100%;
 }
 
 .ButtonInput__button {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
   font-size: 12px;
   font-weight: bold;
   background-color: rgb(97, 62, 181);
   margin: 5px;
+  width: 100%;
+}
+
+.ButtonInput__label {
+  grid-column: 2;
 }
 
 .ButtonInput__loading {
