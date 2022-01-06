@@ -13,7 +13,7 @@ interface ButtonInputProps {
 export const ButtonInput = (props: ButtonInputProps) => {
   return (
     <div className='ButtonInput'>
-      <button className='ButtonInput__button' type={props.type} onClick={props.onClick}>
+      <button className='ButtonInput__button' type={props.type} disabled={props.isLoading} onClick={props.onClick}>
         {props.isLoading && (
           <img
             className='ButtonInput__loading'
