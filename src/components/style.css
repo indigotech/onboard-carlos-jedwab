@@ -1,0 +1,51 @@
+.TextLabel {
+  text-align: center;
+}
+
+.TextLabel__label {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(87, 87, 87);
+}
+
+.TextLabel__header {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.TextLabel__button {
+  font-size: 12px;
+  font-weight: bold;
+  color: rgb(255, 255, 255);
+  margin: 5px;
+}
+
+.TextLabel__error {
+  color: #f00;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.TextInput {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.TextInput__input {
+  font-size: 12px;
+  font-weight: normal;
+  color: #000;
+}
+
+.ButtonInput {
+  display: flex;
+}
+
+.ButtonInput__button {
+  font-size: 12px;
+  font-weight: bold;
+  background-color: rgb(97, 62, 181);
+  margin: 5px;
+}
