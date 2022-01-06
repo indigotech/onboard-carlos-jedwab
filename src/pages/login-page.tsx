@@ -73,8 +73,8 @@ export const LoginPage = () => {
 
   return (
     <div className='LoginBox'>
-      <div className='LoginBox__content'>
-        <Text type='header'>{loginTranslations.welcome}</Text>
+      <div className='LoginBox__title'>
+        <Text type='header'>{translations.pt.login.welcome}</Text>
       </div>
 
       <form className='LoginBox__content' onSubmit={onSubmit}>
