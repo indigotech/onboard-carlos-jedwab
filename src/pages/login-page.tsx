@@ -25,13 +25,18 @@ export const LoginPage = () => {
     setPassword(event.target.value);
   };
 
-  const onSubmit = () => {
+  const validate = (email: string, password: string) => {
     const emailValidation = validateEmail(email);
     const passwordValidation = validatePassword(password);
     setEmailError(emailValidation);
     setPasswordError(passwordValidation);
     setCredentialsError('');
-    if (emailValidation === '' && passwordValidation === '') {
+    const isValid = emailValidation === '' && passwordValidation === '';
+    return isValid;
+  };
+
+  const onSubmit = () => {
+    if (validate(email, password)) {
       loginUser(email, password)
         .then((result) => {
           const token = result.data.login.token;
