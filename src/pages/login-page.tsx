@@ -1,13 +1,13 @@
 import React from 'react';
 import './style.css';
 
-import { TextLabel } from './text-label';
-import { TextInput } from './text-input';
-import { ButtonInput } from './button-input';
+import { Text } from '../components/text';
+import { TextInput } from '../components/text-input';
+import { ButtonInput } from '../components/button-input';
 
 import { validateEmail, validatePassword } from '../helpers/login-validation';
 
-export const LoginBox = () => {
+export const LoginPage = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
@@ -35,14 +35,14 @@ export const LoginBox = () => {
   return (
     <div className='LoginBox'>
       <div className='LoginBox__content'>
-        <TextLabel type='header'>Bem-vindo(a) à Taqtile!</TextLabel>
+        <Text type='header'>Bem-vindo(a) à Taqtile!</Text>
       </div>
 
       <div className='LoginBox__content'>
         <TextInput label='E-mail' value={email} onChange={onChangeEmail} />
         <TextInput label='Senha' value={password} onChange={onChangePassword} />
-        {emailError !== '' && <TextLabel type='error'>{emailError}</TextLabel>}
-        {passwordError !== '' && <TextLabel type='error'>{passwordError}</TextLabel>}
+        {emailError !== '' && <Text type='error'>{emailError}</Text>}
+        {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
         <ButtonInput label='Entrar' onClick={onSubmit} />
       </div>
     </div>

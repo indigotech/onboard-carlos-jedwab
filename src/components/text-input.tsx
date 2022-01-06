@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-import { TextLabel } from './text-label';
+import { Text } from './text';
 
 interface TextInputProps {
   label: string;
@@ -12,7 +12,7 @@ interface TextInputProps {
 export const TextInput = (props: TextInputProps) => {
   return (
     <div className='TextInput'>
-      <TextLabel type='label'>{props.label}</TextLabel>
+      <Text type='label'>{props.label}</Text>
       <input className='TextInput__input' type='text' value={props.value} onChange={props.onChange} />
     </div>
   );

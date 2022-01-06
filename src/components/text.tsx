@@ -1,12 +1,12 @@
 import React from 'react';
 import './style.css';
 
-interface TextLabelProps {
+interface TextProps {
   type: 'header' | 'label' | 'error' | 'button';
   children: string | string[];
 }
 
-export const TextLabel = (props: TextLabelProps) => {
+export const Text = (props: TextProps) => {
   return (
     <div className='TextLabel'>
       <header className={'TextLabel__' + props.type}>{props.children}</header>

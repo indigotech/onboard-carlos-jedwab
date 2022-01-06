@@ -1,0 +1,12 @@
+.LoginBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LoginBox__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}

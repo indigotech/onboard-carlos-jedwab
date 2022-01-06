@@ -7,8 +7,6 @@ const isEmail = (value: string) => {
   return pattern.test(value);
 };
 
-const isBiggerThan = (value: string, min: number) => value.length >= min;
-
 const hasLetterAndNumber = (value: string) => {
   const pattern = new RegExp(/^(?=.*[0-9])(?=.*[A-Za-z])/);
   return pattern.test(value);
@@ -28,7 +26,7 @@ export const validatePassword = (password: string) => {
   if (!isGiven(password)) {
     return 'A senha deve ser fornecida';
   }
-  if (!isBiggerThan(password, 7)) {
+  if (password.length < 7) {
     return 'A senha deve ter no mínimo 7 caracteres';
   }
   if (!hasLetterAndNumber(password)) {

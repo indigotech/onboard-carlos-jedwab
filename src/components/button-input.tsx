@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-import { TextLabel } from './text-label';
+import { Text } from './text';
 
 interface ButtonInputProps {
   label: string;
@@ -12,7 +12,7 @@ export const ButtonInput = (props: ButtonInputProps) => {
   return (
     <div className='ButtonInput'>
       <button className='ButtonInput__button' onClick={props.onClick}>
-        <TextLabel type='button'>{props.label}</TextLabel>
+        <Text type='button'>{props.label}</Text>
       </button>
     </div>
   );
