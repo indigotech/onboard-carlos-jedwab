@@ -22,8 +22,6 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const navigate = useNavigate();
-
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
