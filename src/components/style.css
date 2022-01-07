@@ -57,18 +57,29 @@
   grid-column: 2;
 }
 
-.ButtonInput__loading {
-  width: 20px;
+.Spinner {
   pointer-events: none;
 }
 
+.Spinner__small {
+  width: 20px;
+}
+
+.Spinner__medium {
+  width: 40px;
+}
+
+.Spinner__large {
+  width: 60px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .ButtonInput__loading {
-    animation: ButtonInput__loading-spin infinite 1s linear;
+  .Spinner {
+    animation: Spinner-spin infinite 1s linear;
   }
 }
 
-@keyframes ButtonInput__loading-spin {
+@keyframes Spinner-spin {
   from {
     transform: rotate(0deg);
   }
