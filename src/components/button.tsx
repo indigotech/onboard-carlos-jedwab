@@ -15,7 +15,7 @@ export const Button = (props: ButtonProps) => {
   return (
     <div className='Button'>
       <button className='Button__button' type={props.type} disabled={props.isLoading} onClick={props.onClick}>
-        <Spinner hide={!props.isLoading} size='small' />
+        {props.isLoading && <Spinner size='small' />}
         <div className='Button__label'>
           <Text type='button'>{props.label}</Text>
         </div>

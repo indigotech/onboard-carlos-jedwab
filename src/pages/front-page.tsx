@@ -1,31 +1,47 @@
 import React from 'react';
 
+import { Text } from '../components/text';
 import { Spinner } from '../components/spinner';
 import { Table, RowType } from '../components/table';
 
+import { useUsers } from '../graphql/queries/use-users';
+
+import { translations } from '../helpers/translations';
+
 export const FrontPage = () => {
-  // TODO: Change isLoading to a state and show it only when during this page's request
-  const isLoading = true;
+  const [isLoading, setIsLoading] = React.useState(false);
 
-  // TODO: Use the data from a request
+  const frontPageTranslations = translations.pt.front_page;
+
   const header = ['Nome', 'Email'];
+  const [rows, setRows] = React.useState<RowType[]>([]);
 
-  const rows: RowType[] = [
-    {
-      name: 'John',
-      email: 'john@test.com',
-    },
-    {
-      name: 'Jane',
-      email: 'jane@test.com',
-    },
-  ];
+  const loadUsers = async () => {
+    setIsLoading(true);
+    const { data } = await useUsers();
+    const rows: RowType[] = data.users.nodes.map((user: RowType) => ({
+      name: user.name,
+      email: user.email,
+    }));
+    setRows(rows);
+    setIsLoading(false);
+  };
+
+  React.useEffect(() => {
+    loadUsers();
+  }, []);
 
   return (
-    <div>
-      <h1>FrontPage</h1>
-      {isLoading && <Spinner size='medium' />}
-      <Table header={header} rows={rows} />
+    <div className='FrontPage'>
+      <Text type='header'>{frontPageTranslations.title}</Text>
+      <Text type='label'>{frontPageTranslations.subtitle}</Text>
+      {isLoading ? (
+        <Spinner size='medium' />
+      ) : (
+        <div className='FrontPage__table'>
+          <Table header={header} rows={rows} />
+        </div>
+      )}
     </div>
   );
 };
