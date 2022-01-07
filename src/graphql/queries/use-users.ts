@@ -2,7 +2,7 @@ import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
 import { uri } from '../uri';
 
-export const useUsers = async () => {
+export const useUsers = async (page: number) => {
   const client = new ApolloClient({
     uri,
     cache: new InMemoryCache(),
@@ -14,7 +14,7 @@ export const useUsers = async () => {
   return client.query({
     query: gql`
       query {
-        users {
+        users(pageInfo: { offset: ${0}, limit: ${page} }) {
           nodes {
             name
             email
