@@ -15,7 +15,9 @@ export const LoginPage = () => {
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
-  const [credentialsError, setCredentialsError] = React.useState('');
+  const [internalError, setInternalError] = React.useState('');
+
+  const loginTranslations = translations.pt.login;
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -30,9 +32,8 @@ export const LoginPage = () => {
     const passwordValidation = validatePassword(password);
     setEmailError(emailValidation);
     setPasswordError(passwordValidation);
-    setCredentialsError('');
-    const isValid = emailValidation === '' && passwordValidation === '';
-    return isValid;
+    setInternalError('');
+    return emailValidation === '' && passwordValidation === '';
   };
 
   const onSubmit = () => {
@@ -44,8 +45,8 @@ export const LoginPage = () => {
           //console.log('token', window.localStorage.getItem('token'));
         })
         .catch((error) => {
-          const message = error.message || translations.pt.login.error.invalidCredentials;
-          setCredentialsError(message);
+          const message = error.message;
+          setInternalError(message);
         });
     }
   };
@@ -53,16 +54,16 @@ export const LoginPage = () => {
   return (
     <div className='LoginBox'>
       <div className='LoginBox__content'>
-        <Text type='header'>{translations.pt.login.welcome}</Text>
+        <Text type='header'>{loginTranslations.welcome}</Text>
       </div>
 
       <div className='LoginBox__content'>
-        <TextInput label={translations.pt.login.email} value={email} onChange={onChangeEmail} />
-        <TextInput label={translations.pt.login.password} value={password} onChange={onChangePassword} />
+        <TextInput label={loginTranslations.email} value={email} onChange={onChangeEmail} />
+        <TextInput label={loginTranslations.password} value={password} onChange={onChangePassword} />
         {emailError !== '' && <Text type='error'>{emailError}</Text>}
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
-        {credentialsError !== '' && <Text type='error'>{credentialsError}</Text>}
-        <ButtonInput label={translations.pt.login.submit} onClick={onSubmit} />
+        {internalError !== '' && <Text type='error'>{internalError}</Text>}
+        <ButtonInput label={loginTranslations.submit} onClick={onSubmit} />
       </div>
     </div>
   );

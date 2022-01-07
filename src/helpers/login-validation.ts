@@ -1,5 +1,7 @@
 import { translations } from './translations';
 
+const loginTranslations = translations.pt.login;
+
 const isGiven = (value: string) => value.length > 0;
 
 const isEmail = (value: string) => {
@@ -16,23 +18,23 @@ const hasLetterAndNumber = (value: string) => {
 
 export const validateEmail = (email: string) => {
   if (!isGiven(email)) {
-    return translations.pt.login.error.missingEmail;
+    return loginTranslations.error.missingEmail;
   }
   if (!isEmail(email)) {
-    return translations.pt.login.error.invalidEmail;
+    return loginTranslations.error.invalidEmail;
   }
   return '';
 };
 
 export const validatePassword = (password: string) => {
   if (!isGiven(password)) {
-    return translations.pt.login.error.missingPassword;
+    return loginTranslations.error.missingPassword;
   }
   if (password.length < 7) {
-    return translations.pt.login.error.smallPassword;
+    return loginTranslations.error.smallPassword;
   }
   if (!hasLetterAndNumber(password)) {
-    return translations.pt.login.error.simplePassword;
+    return loginTranslations.error.simplePassword;
   }
   return '';
 };
