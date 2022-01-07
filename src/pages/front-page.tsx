@@ -8,10 +8,10 @@ import { useUsers } from '../graphql/queries/use-users';
 
 import { translations } from '../helpers/translations';
 
+const frontPageTranslations = translations.pt.front_page;
+
 export const FrontPage = () => {
   const [isLoading, setIsLoading] = React.useState(false);
-
-  const frontPageTranslations = translations.pt.front_page;
 
   const header = ['Nome', 'Email'];
   const [rows, setRows] = React.useState<RowType[]>([]);
