@@ -88,22 +88,33 @@
   }
 }
 
-.ButtonInput__loading {
-  width: 20px;
-  pointer-events: none;
+.Table {
+  width: 500px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .ButtonInput__loading {
-    animation: ButtonInput__loading-spin infinite 1s linear;
-  }
+.Table__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(162, 162, 162);
+  margin: 5px;
+  width: 100%;
 }
 
-@keyframes ButtonInput__loading-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.Table__row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgb(198, 198, 198);
+  margin: 5px;
+  width: 100%;
+}
+
+.Table__item {
+  display: flex;
+  justify-content: flex-start;
+  margin: 8px;
+  width: 100%;
 }
