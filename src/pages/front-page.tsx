@@ -9,7 +9,7 @@ export const FrontPage = () => {
   return (
     <div>
       <h1>FrontPage</h1>
-      <Spinner hide={!isLoading} size='medium' />
+      {isLoading && <Spinner size='medium' />}
     </div>
   );
 };
