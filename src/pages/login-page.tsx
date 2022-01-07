@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { Text } from '../components/text';
 import { TextInput } from '../components/text-input';
-import { ButtonInput } from '../components/button-input';
+import { Button } from '../components/button';
 
 import { translations } from '../helpers/translations';
 import { validateEmail, validatePassword } from '../helpers/login-validation';
@@ -76,7 +76,7 @@ export const LoginPage = () => {
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
         {internalError !== '' && <Text type='error'>{internalError}</Text>}
 
-        <ButtonInput label={translations.pt.login.submit} type='submit' isLoading={isLoading} />
+        <Button label={translations.pt.login.submit} type='submit' isLoading={isLoading} />
       </form>
     </div>
   );

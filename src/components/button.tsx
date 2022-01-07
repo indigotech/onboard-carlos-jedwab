@@ -4,19 +4,19 @@ import './style.css';
 import { Text } from './text';
 import { Spinner } from './spinner';
 
-interface ButtonInputProps {
+interface ButtonProps {
   label: string;
   type?: 'button' | 'submit' | 'reset';
   isLoading?: boolean;
   onClick?: () => void;
 }
 
-export const ButtonInput = (props: ButtonInputProps) => {
+export const Button = (props: ButtonProps) => {
   return (
-    <div className='ButtonInput'>
-      <button className='ButtonInput__button' type={props.type} disabled={props.isLoading} onClick={props.onClick}>
+    <div className='Button'>
+      <button className='Button__button' type={props.type} disabled={props.isLoading} onClick={props.onClick}>
         <Spinner hide={!props.isLoading} size='small' />
-        <div className='ButtonInput__label'>
+        <div className='Button__label'>
           <Text type='button'>{props.label}</Text>
         </div>
       </button>

@@ -38,11 +38,11 @@
   width: 100%;
 }
 
-.ButtonInput {
+.Button {
   width: 100%;
 }
 
-.ButtonInput__button {
+.Button__button {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   align-items: center;
@@ -53,7 +53,7 @@
   width: 100%;
 }
 
-.ButtonInput__label {
+.Button__label {
   grid-column: 2;
 }
 
