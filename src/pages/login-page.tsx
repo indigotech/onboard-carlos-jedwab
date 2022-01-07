@@ -42,7 +42,6 @@ export const LoginPage = () => {
         .then((result) => {
           const token = result.data.login.token;
           window.localStorage.setItem('token', token);
-          //console.log('token', window.localStorage.getItem('token'));
         })
         .catch((error) => {
           const message = error.message;
