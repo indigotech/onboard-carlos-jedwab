@@ -11,6 +11,7 @@ export const translations = {
         missingPassword: 'A senha deve ser fornecida',
         smallPassword: 'A senha deve ter no mínimo 7 caracteres',
         simplePassword: 'A senha deve ter letras e números',
+        invalidCredentials: 'Email ou senha inválidos, por favor tente novamente',
       },
     },
   },

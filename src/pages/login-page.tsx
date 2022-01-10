@@ -44,8 +44,13 @@ export const LoginPage = () => {
           window.localStorage.setItem('token', token);
         })
         .catch((error) => {
-          const message = error.message;
-          setInternalError(message);
+          error.graphQLErrors.forEach((error: { code: number; message: string }) => {
+            if (error.code === 401) {
+              setInternalError(loginTranslations.error.invalidCredentials);
+            } else {
+              setInternalError(error.message);
+            }
+          });
         });
     }
   };
