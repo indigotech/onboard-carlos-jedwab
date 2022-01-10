@@ -4,7 +4,7 @@ import { uri } from '../uri';
 
 export const loginUser = async (email: string, password: string) => {
   const client = new ApolloClient({
-    uri: uri,
+    uri,
     cache: new InMemoryCache(),
   });
 

@@ -4,7 +4,7 @@ import { uri } from '../uri';
 
 export const useUsers = async () => {
   const client = new ApolloClient({
-    uri: uri,
+    uri,
     cache: new InMemoryCache(),
     headers: {
       Authorization: localStorage.getItem('token') ? `${localStorage.getItem('token')}` : '',
