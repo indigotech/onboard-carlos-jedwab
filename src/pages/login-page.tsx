@@ -38,7 +38,8 @@ export const LoginPage = () => {
     setEmailError(emailValidation);
     setPasswordError(passwordValidation);
     setInternalError('');
-    return emailValidation === '' && passwordValidation === '';
+    const isValid = emailValidation === '' && passwordValidation === '';
+    return isValid;
   };
 
   const tryLogin = async (email: string, password: string) => {
