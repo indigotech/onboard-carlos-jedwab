@@ -1,5 +1,6 @@
 import React from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 import { Text } from '../components/text';
 import { TextInput } from '../components/text-input';
@@ -19,6 +20,8 @@ export const LoginPage = () => {
 
   const loginTranslations = translations.pt.login;
 
+  const navigate = useNavigate();
+
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
   };
@@ -36,12 +39,14 @@ export const LoginPage = () => {
     return emailValidation === '' && passwordValidation === '';
   };
 
-  const onSubmit = () => {
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     if (validate(email, password)) {
       loginUser(email, password)
         .then((result) => {
           const token = result.data.login.token;
           window.localStorage.setItem('token', token);
+          navigate('/front_page');
         })
         .catch((error) => {
           error.graphQLErrors.forEach((error: { code: number; message: string }) => {
@@ -61,14 +66,16 @@ export const LoginPage = () => {
         <Text type='header'>{loginTranslations.welcome}</Text>
       </div>
 
-      <div className='LoginBox__content'>
-        <TextInput label={loginTranslations.email} value={email} onChange={onChangeEmail} />
-        <TextInput label={loginTranslations.password} value={password} onChange={onChangePassword} />
+      <form className='LoginBox__content' onSubmit={onSubmit}>
+        <TextInput label={translations.pt.login.email} value={email} onChange={onChangeEmail} />
+        <TextInput label={translations.pt.login.password} value={password} onChange={onChangePassword} />
+
         {emailError !== '' && <Text type='error'>{emailError}</Text>}
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
         {internalError !== '' && <Text type='error'>{internalError}</Text>}
-        <ButtonInput label={loginTranslations.submit} onClick={onSubmit} />
-      </div>
+
+        <ButtonInput label={translations.pt.login.submit} type='submit' />
+      </form>
     </div>
   );
 };
