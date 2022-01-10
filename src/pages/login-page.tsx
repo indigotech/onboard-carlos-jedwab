@@ -5,13 +5,19 @@ import { Text } from '../components/text';
 import { TextInput } from '../components/text-input';
 import { ButtonInput } from '../components/button-input';
 
+import { translations } from '../helpers/translations';
 import { validateEmail, validatePassword } from '../helpers/login-validation';
+
+import { loginUser } from '../graphql/mutations/login-user';
 
 export const LoginPage = () => {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
+  const [internalError, setInternalError] = React.useState('');
+
+  const loginTranslations = translations.pt.login;
 
   const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(event.target.value);
@@ -21,29 +27,47 @@ export const LoginPage = () => {
     setPassword(event.target.value);
   };
 
+  const validate = (email: string, password: string) => {
+    const emailValidation = validateEmail(email);
+    const passwordValidation = validatePassword(password);
+    setEmailError(emailValidation);
+    setPasswordError(passwordValidation);
+    setInternalError('');
+    return emailValidation === '' && passwordValidation === '';
+  };
+
   const onSubmit = () => {
-    setEmailError(validateEmail(email));
-    setPasswordError(validatePassword(password));
-    if (emailError === '' && passwordError === '') {
-      console.log(`Email: ${email}`);
-      console.log(`Password: ${password}`);
-    } else {
-      console.log(emailError + ' ' + passwordError);
+    if (validate(email, password)) {
+      loginUser(email, password)
+        .then((result) => {
+          const token = result.data.login.token;
+          window.localStorage.setItem('token', token);
+        })
+        .catch((error) => {
+          error.graphQLErrors.forEach((error: { code: number; message: string }) => {
+            if (error.code === 401) {
+              setInternalError(loginTranslations.error.invalidCredentials);
+            } else {
+              setInternalError(error.message);
+            }
+          });
+        });
     }
   };
 
   return (
     <div className='LoginBox'>
       <div className='LoginBox__content'>
-        <Text type='header'>Bem-vindo(a) à Taqtile!</Text>
+        <Text type='header'>{loginTranslations.welcome}</Text>
       </div>
 
       <div className='LoginBox__content'>
-        <TextInput label='E-mail' value={email} onChange={onChangeEmail} />
-        <TextInput label='Senha' value={password} onChange={onChangePassword} />
+        <TextInput label={loginTranslations.email} value={email} onChange={onChangeEmail} />
+        <TextInput label={loginTranslations.password} value={password} onChange={onChangePassword} />
         {emailError !== '' && <Text type='error'>{emailError}</Text>}
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
-        <ButtonInput label='Entrar' onClick={onSubmit} />
+        {internalError !== '' && <Text type='error'>{internalError}</Text>}
+        <ButtonInput label={loginTranslations.submit} onClick={onSubmit} />
       </div>
     </div>
   );
