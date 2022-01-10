@@ -3,11 +3,10 @@ import './style.css';
 
 import { Text } from './text';
 
-export type HeaderType = string[];
 export type RowType = Record<string, string>;
 
 interface TableProps {
-  header: HeaderType;
+  header: string[];
   rows: RowType[];
 }
 
@@ -17,7 +16,7 @@ export const Table = (props: TableProps) => {
       <div className='Table__header'>
         {props.header.map((item, i) => (
           <div className='Table__item' key={i}>
-            {<Text type={'header'}>{item}</Text>}
+            <Text type={'header'}>{item}</Text>
           </div>
         ))}
       </div>
@@ -26,7 +25,7 @@ export const Table = (props: TableProps) => {
         <div className='Table__row' key={i}>
           {Object.entries(row).map(([key, item]) => (
             <div className='Table__item' key={key}>
-              {<Text type={'label'}>{item}</Text>}
+              <Text type={'label'}>{item}</Text>
             </div>
           ))}
         </div>
