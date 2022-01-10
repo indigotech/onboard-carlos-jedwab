@@ -10,6 +10,7 @@ import { translations } from '../helpers/translations';
 import { validateEmail, validatePassword } from '../helpers/login-validation';
 
 import { loginUser } from '../graphql/mutations/login-user';
+import { ApolloError } from '@apollo/client';
 
 export const LoginPage = () => {
   const [email, setEmail] = React.useState('');
@@ -42,16 +43,24 @@ export const LoginPage = () => {
 
   const tryLogin = async (email: string, password: string) => {
     setIsLoading(true);
-    await loginUser(email, password)
-      .then((result) => {
-        const token = result.data.login.token;
-        window.localStorage.setItem('token', token);
-        navigate('/front_page');
-      })
-      .catch((error) => {
-        const message = error.message || translations.pt.login.error.invalidCredentials;
-        setInternalError(message);
-      });
+    try {
+      const result = await loginUser(email, password);
+      const token = result.data.login.token;
+      window.localStorage.setItem('token', token);
+      navigate('/front_page');
+    } catch (errors) {
+      if (errors instanceof ApolloError) {
+        errors.graphQLErrors.forEach((error) => {
+          if (error.extensions.code === 'INTERNAL_SERVER_ERROR') {
+            setInternalError(loginTranslations.error.invalidCredentials);
+          } else {
+            setInternalError(error.message);
+          }
+        });
+      } else {
+        setInternalError(loginTranslations.error.unknownError);
+      }
+    }
     setIsLoading(false);
   };
 
