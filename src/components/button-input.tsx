@@ -5,13 +5,14 @@ import { Text } from './text';
 
 interface ButtonInputProps {
   label: string;
+  type?: 'button' | 'submit' | 'reset';
   onClick?: () => void;
 }
 
 export const ButtonInput = (props: ButtonInputProps) => {
   return (
     <div className='ButtonInput'>
-      <button className='ButtonInput__button' onClick={props.onClick}>
+      <button className='ButtonInput__button' type={props.type} onClick={props.onClick}>
         <Text type='button'>{props.label}</Text>
       </button>
     </div>
