@@ -13,7 +13,7 @@ function isBottom(ref: React.RefObject<HTMLDivElement>) {
   return ref.current.getBoundingClientRect().bottom <= window.innerHeight;
 }
 
-export const InfiniteScroll = (props: InfiniteScrollProps) => {
+export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
   const contentRef = React.useRef(null);
 
   const handleLoadMore = () => {
