@@ -1,26 +1,54 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
 
-import { uri } from '../uri';
+import { getNewClient } from '../../helpers/new-client';
 
-export const useUsers = async (page: number) => {
-  const client = new ApolloClient({
-    uri,
-    cache: new InMemoryCache(),
-    headers: {
-      Authorization: localStorage.getItem('token') ? `${localStorage.getItem('token')}` : '',
-    },
-  });
+interface Nodes {
+  nodes: {
+    name: string;
+    email: string;
+  }[];
+}
 
-  return client.query({
-    query: gql`
-      query {
-        users(pageInfo: { offset: ${0}, limit: ${page} }) {
-          nodes {
-            name
-            email
-          }
-        }
+interface UsersData {
+  users: Nodes;
+}
+
+interface UsersVars {
+  pageInfo: {
+    limit: number;
+  };
+}
+
+const GET_USERS = gql`
+  query GET_USERS($pageInfo: PageInputType) {
+    users(pageInfo: $pageInfo) {
+      nodes {
+        name
+        email
       }
-    `,
+    }
+  }
+`;
+
+const client = getNewClient({ withAuthorizarion: true });
+
+export const useUsers = (page: number) => {
+  const result = useQuery<UsersData, UsersVars>(GET_USERS, {
+    notifyOnNetworkStatusChange: true,
+    variables: {
+      pageInfo: {
+        limit: page,
+      },
+    },
+    client,
   });
+
+  const users = result.data?.users.nodes;
+
+  return {
+    users,
+    error: result.error,
+    loading: result.loading,
+    refetch: () => result.refetch(),
+  };
 };

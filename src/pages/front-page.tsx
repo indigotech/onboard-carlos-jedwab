@@ -10,29 +10,19 @@ import { useUsers } from '../graphql/queries/use-users';
 import { translations } from '../helpers/translations';
 
 const frontPageTranslations = translations.pt.front_page;
+const header = ['Nome', 'Email'];
 const loadNumber = 10;
 
 export const FrontPage = () => {
   const [rows, setRows] = React.useState<RowType[]>([]);
   const [page, setPage] = React.useState(0);
-  const [isLoading, setIsLoading] = React.useState(false);
+  const { users, error, loading } = useUsers(page);
 
-  const header = ['Nome', 'Email'];
-
-  const loadUsers = async () => {
-    setIsLoading(true);
-    const { data } = await useUsers(page);
-    const newRows: RowType[] = data.users.nodes.map((user: RowType) => ({
-      name: user.name,
-      email: user.email,
-    }));
-    setRows(newRows);
-    setIsLoading(false);
-  };
-
-  const loadMoreUsers = () => {
+  const handleBottomHit = () => {
     setPage((prev) => prev + loadNumber);
-    loadUsers();
+    if (users) {
+      setRows(users);
+    }
   };
 
   return (
@@ -41,10 +31,14 @@ export const FrontPage = () => {
       <Text type='label'>{frontPageTranslations.subtitle}</Text>
 
       <div className='FrontPage__table'>
-        <InfiniteScroll isLoading={isLoading} onBottomHit={loadMoreUsers}>
-          <Table header={header} rows={rows} />
-          {isLoading && <Spinner size='medium' />}
-        </InfiniteScroll>
+        {error === undefined ? (
+          <InfiniteScroll isLoading={loading} onBottomHit={handleBottomHit}>
+            <Table header={header} rows={rows} />
+            {loading && <Spinner size='medium' />}
+          </InfiniteScroll>
+        ) : (
+          <Text type='error'>{error.message}</Text>
+        )}
       </div>
     </div>
   );

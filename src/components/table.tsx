@@ -24,11 +24,12 @@ export const Table = (props: TableProps) => {
 
       {props.rows.map((row, i) => (
         <div className='Table__row' key={i}>
-          {Object.entries(row).map(([key, item]) => (
-            <div className='Table__item' key={key}>
-              <Text type={'label'}>{item}</Text>
-            </div>
-          ))}
+          <div className='Table__item'>
+            <Text type={'label'}>{row.name}</Text>
+          </div>
+          <div className='Table__item'>
+            <Text type={'label'}>{row.email}</Text>
+          </div>
         </div>
       ))}
     </div>

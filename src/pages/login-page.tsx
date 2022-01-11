@@ -47,7 +47,7 @@ export const LoginPage = () => {
     try {
       const result = await loginUser(email, password);
       const token = result.data.login.token;
-      window.localStorage.setItem('token', token);
+      localStorage.setItem('token', token);
       navigate('/front_page');
     } catch (errors) {
       if (errors instanceof ApolloError) {
@@ -79,8 +79,8 @@ export const LoginPage = () => {
       </div>
 
       <form className='LoginBox__content' onSubmit={onSubmit}>
-        <TextInput label={loginTranslations.email} value={email} onChange={onChangeEmail} />
-        <TextInput label={loginTranslations.password} value={password} onChange={onChangePassword} />
+        <TextInput label={loginTranslations.email} value={email} name='email' onChange={onChangeEmail} />
+        <TextInput label={loginTranslations.password} value={password} name='password' onChange={onChangePassword} />
 
         {emailError !== '' && <Text type='error'>{emailError}</Text>}
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}

@@ -1,13 +1,10 @@
-import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 
-import { uri } from '../uri';
+import { getNewClient } from '../../helpers/new-client';
+
+const client = getNewClient({ withAuthorizarion: false });
 
 export const loginUser = async (email: string, password: string) => {
-  const client = new ApolloClient({
-    uri,
-    cache: new InMemoryCache(),
-  });
-
   return client.mutate({
     mutation: gql`
         mutation {
