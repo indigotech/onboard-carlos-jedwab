@@ -21,6 +21,11 @@ export const translations = {
       name: 'Nome',
       email: 'Email',
       noMoreUsers: 'Fim da lista',
+      phone: 'Telefone',
+      birthDate: 'Data de nascimento',
+      password: 'Senha',
+      role: 'Função',
+      submit: 'Cadastrar',
     },
   },
 };

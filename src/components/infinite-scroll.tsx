@@ -1,4 +1,5 @@
 import React from 'react';
+import './style.css';
 
 type InfiniteScrollProps = {
   onBottomHit: () => void;
@@ -33,5 +34,9 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
     return () => document.removeEventListener('scroll', handleLoadMore);
   }, [props]);
 
-  return <div ref={contentRef}>{props.children}</div>;
+  return (
+    <div ref={contentRef} className='InfiniteScroll'>
+      {props.children}
+    </div>
+  );
 };
