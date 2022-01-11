@@ -1,8 +1,10 @@
 import { ApolloClient, InMemoryCache, gql } from '@apollo/client';
 
+import { uri } from '../uri';
+
 export const loginUser = async (email: string, password: string) => {
   const client = new ApolloClient({
-    uri: 'https://tq-template-server-sample.herokuapp.com/graphql',
+    uri,
     cache: new InMemoryCache(),
   });
 

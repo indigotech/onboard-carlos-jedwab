@@ -15,5 +15,11 @@ export const translations = {
         unknownError: 'Ocorreu um erro inesperado, por favor tente novamente',
       },
     },
+    front_page: {
+      title: 'Página inicial',
+      subtitle: 'Aqui você pode ver a lista de usuários',
+      name: 'Nome',
+      email: 'Email',
+    },
   },
 };

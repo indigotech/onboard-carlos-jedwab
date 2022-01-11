@@ -2,6 +2,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 100%;
 }
 
 .LoginBox__title {
@@ -17,4 +18,16 @@
   align-items: center;
   padding: 10px;
   width: 200px;
+}
+
+.FrontPage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  min-width: 500px;
+}
+
+.FrontPage__table {
+  width: 80%;
 }
