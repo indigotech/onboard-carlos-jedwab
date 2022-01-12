@@ -5,7 +5,7 @@ import { Spinner } from '../components/spinner';
 import { Table, RowType } from '../components/table';
 import { InfiniteScroll } from '../components/infinite-scroll';
 
-import { useUsers } from '../graphql/queries/use-users';
+import { User, useUsers } from '../graphql/queries/use-users';
 
 import { translations } from '../helpers/translations';
 
@@ -17,13 +17,16 @@ const pageSize = 10;
 export const FrontPage = () => {
   const [rows, setRows] = React.useState<RowType[]>([]);
   const [page, setPage] = React.useState(initialPage);
-  const { users, hasMore, error, loading } = useUsers(page);
+
+  const onCompleted = (newUsers: User[]) => {
+    if (newUsers) {
+      setRows((prev) => [...prev, ...newUsers]);
+    }
+  };
+  const { hasMore, error, loading } = useUsers(page, onCompleted);
 
   const handleBottomHit = () => {
     setPage((prev) => prev + pageSize);
-    if (users) {
-      setRows(users);
-    }
   };
 
   return (

@@ -2,11 +2,13 @@ import { gql, useQuery } from '@apollo/client';
 
 import { getNewClient } from '../../helpers/new-client';
 
+export interface User {
+  name: string;
+  email: string;
+}
 interface Users {
-  nodes: {
-    name: string;
-    email: string;
-  }[];
+  count: number;
+  nodes: User[];
 }
 
 interface UsersData {
@@ -15,6 +17,7 @@ interface UsersData {
 
 interface UsersVars {
   pageInfo: {
+    offset: number;
     limit: number;
   };
 }
@@ -22,6 +25,7 @@ interface UsersVars {
 const GET_USERS = gql`
   query GET_USERS($pageInfo: PageInputType) {
     users(pageInfo: $pageInfo) {
+      count
       nodes {
         name
         email
@@ -32,27 +36,31 @@ const GET_USERS = gql`
 
 const client = getNewClient({ withAuthorizarion: true });
 
-export const useUsers = (page: number) => {
+export const useUsers = (page: number, onCompleted: (newUsers: User[]) => void) => {
+  const handleCompleted = (data: UsersData) => {
+    const newUsers = data?.users.nodes;
+    onCompleted(newUsers);
+  };
+
   const result = useQuery<UsersData, UsersVars>(GET_USERS, {
     notifyOnNetworkStatusChange: true,
+    onCompleted: handleCompleted,
     variables: {
       pageInfo: {
-        limit: page,
+        offset: page,
+        limit: 10,
       },
     },
     client,
   });
 
-  const users = result.data?.users.nodes;
-
-  const count = users?.length;
+  const count = result.data?.users.count;
   let hasMore = true;
   if (count && page > count) {
     hasMore = false;
   }
 
   return {
-    users,
     hasMore,
     error: result.error,
     loading: result.loading,
