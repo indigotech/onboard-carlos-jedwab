@@ -18,7 +18,7 @@ enum RoleEnum {
   USER = 'user',
 }
 
-type UserForms = {
+type UserType = {
   name: string;
   email: string;
   phone: string;
@@ -43,7 +43,7 @@ export const FrontPage = () => {
   };
   const { hasMore, error, loading } = useUsers(page, onCompleted);
   const [formsErrors, setFormsErrors] = React.useState<string[]>([]);
-  const [userForms, setUserForms] = React.useState<UserForms>({
+  const [userForms, setUserForms] = React.useState<UserType>({
     name: '',
     email: '',
     phone: '',
@@ -56,7 +56,7 @@ export const FrontPage = () => {
     setPage((prev) => prev + pageSize);
   };
 
-  const validate = (userForms: UserForms) => {
+  const validate = (userForms: UserType) => {
     const newErrors: string[] = [];
     newErrors.push(validateName(userForms.name));
     newErrors.push(validateEmail(userForms.email));
