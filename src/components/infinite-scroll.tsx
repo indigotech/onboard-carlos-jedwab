@@ -4,7 +4,6 @@ type InfiniteScrollProps = {
   onBottomHit: () => void;
   hasMore: boolean;
   isLoading: boolean;
-  children: React.ReactNode;
 };
 
 function isBottom(ref: React.RefObject<HTMLDivElement>) {
@@ -23,8 +22,13 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
     }
   };
 
+  // initial load
   React.useEffect(() => {
     handleLoadMore();
+  }, [props]);
+
+  // load more on scroll
+  React.useEffect(() => {
     document.addEventListener('scroll', handleLoadMore);
     return () => document.removeEventListener('scroll', handleLoadMore);
   }, [props]);

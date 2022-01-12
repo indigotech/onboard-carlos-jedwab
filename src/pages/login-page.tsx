@@ -9,7 +9,7 @@ import { Button } from '../components/button';
 import { translations } from '../helpers/translations';
 import { validateEmail, validatePassword } from '../helpers/login-validation';
 
-import { loginUser } from '../graphql/mutations/login-user';
+import { loginUserMutation } from '../graphql/mutations/login-user-mutation';
 import { ApolloError } from '@apollo/client';
 
 const loginTranslations = translations.pt.login;
@@ -45,7 +45,7 @@ export const LoginPage = () => {
   const tryLogin = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const result = await loginUser(email, password);
+      const result = await loginUserMutation(email, password);
       const token = result.data.login.token;
       localStorage.setItem('token', token);
       navigate('/front_page');

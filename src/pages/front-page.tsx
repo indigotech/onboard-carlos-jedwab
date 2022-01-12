@@ -10,16 +10,17 @@ import { useUsers } from '../graphql/queries/use-users';
 import { translations } from '../helpers/translations';
 
 const frontPageTranslations = translations.pt.front_page;
-const header = ['Nome', 'Email'];
-const loadNumber = 10;
+const usersTableHeader = ['Nome', 'Email'];
+const initialPage = 0;
+const pageSize = 10;
 
 export const FrontPage = () => {
   const [rows, setRows] = React.useState<RowType[]>([]);
-  const [page, setPage] = React.useState(0);
+  const [page, setPage] = React.useState(initialPage);
   const { users, hasMore, error, loading } = useUsers(page);
 
   const handleBottomHit = () => {
-    setPage((prev) => prev + loadNumber);
+    setPage((prev) => prev + pageSize);
     if (users) {
       setRows(users);
     }
@@ -33,7 +34,7 @@ export const FrontPage = () => {
       <div className='FrontPage__table'>
         {error === undefined ? (
           <InfiniteScroll isLoading={loading} hasMore={hasMore} onBottomHit={handleBottomHit}>
-            <Table header={header} rows={rows} />
+            <Table header={usersTableHeader} rows={rows} />
             {hasMore ? (
               loading && <Spinner size='medium' />
             ) : (
