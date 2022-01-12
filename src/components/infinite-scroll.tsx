@@ -2,6 +2,7 @@ import React from 'react';
 
 type InfiniteScrollProps = {
   onBottomHit: () => void;
+  hasMore: boolean;
   isLoading: boolean;
   children: React.ReactNode;
 };
@@ -17,7 +18,7 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
   const contentRef = React.useRef(null);
 
   const handleLoadMore = () => {
-    if (!props.isLoading && isBottom(contentRef)) {
+    if (!props.isLoading && isBottom(contentRef) && props.hasMore) {
       props.onBottomHit();
     }
   };

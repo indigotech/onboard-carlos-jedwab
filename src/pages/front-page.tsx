@@ -16,7 +16,7 @@ const loadNumber = 10;
 export const FrontPage = () => {
   const [rows, setRows] = React.useState<RowType[]>([]);
   const [page, setPage] = React.useState(0);
-  const { users, error, loading } = useUsers(page);
+  const { users, hasMore, error, loading } = useUsers(page);
 
   const handleBottomHit = () => {
     setPage((prev) => prev + loadNumber);
@@ -32,9 +32,13 @@ export const FrontPage = () => {
 
       <div className='FrontPage__table'>
         {error === undefined ? (
-          <InfiniteScroll isLoading={loading} onBottomHit={handleBottomHit}>
+          <InfiniteScroll isLoading={loading} hasMore={hasMore} onBottomHit={handleBottomHit}>
             <Table header={header} rows={rows} />
-            {loading && <Spinner size='medium' />}
+            {hasMore ? (
+              loading && <Spinner size='medium' />
+            ) : (
+              <Text type='label'>{frontPageTranslations.noMoreUsers}</Text>
+            )}
           </InfiniteScroll>
         ) : (
           <Text type='error'>{error.message}</Text>
