@@ -8,7 +8,7 @@ interface SelectInputProps {
   name: string;
   options: string[];
   value: string;
-  onChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
+  onChange: (selectedIndex: number) => void;
 }
 
 export const SelectInput = (props: SelectInputProps) => {
@@ -16,7 +16,7 @@ export const SelectInput = (props: SelectInputProps) => {
 
   const handleChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setIndex(event.target.selectedIndex);
-    props.onChange(event);
+    props.onChange(event.target.selectedIndex);
   };
 
   return (

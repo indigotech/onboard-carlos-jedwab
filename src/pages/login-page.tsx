@@ -25,12 +25,12 @@ export const LoginPage = () => {
 
   const navigate = useNavigate();
 
-  const onChangeEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(event.target.value);
+  const onChangeEmail = (text: string) => {
+    setEmail(text);
   };
 
-  const onChangePassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(event.target.value);
+  const onChangePassword = (text: string) => {
+    setPassword(text);
   };
 
   const validate = (email: string, password: string) => {

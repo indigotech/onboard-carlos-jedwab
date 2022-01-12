@@ -25,3 +25,7 @@ export const toText = (date: Date) => {
   const ddmmyyyy = dd + '/' + mm + '/' + yyyy;
   return ddmmyyyy;
 };
+
+export const onlyDigits = (value: string) => {
+  return value.replace(/\D/g, '');
+};

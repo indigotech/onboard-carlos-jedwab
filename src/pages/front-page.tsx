@@ -4,6 +4,7 @@ import { Text } from '../components/text';
 import { Button } from '../components/button';
 import { TextInput } from '../components/text-input';
 import { DateInput } from '../components/date-input';
+import { PhoneInput } from '../components/phone-input';
 import { SelectInput } from '../components/select-input';
 import { Spinner } from '../components/spinner';
 import { Table, RowType } from '../components/table';
@@ -75,16 +76,16 @@ export const FrontPage = () => {
     }
   };
 
-  const handleChangeText = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserForms({ ...userForms, [key]: event.target.value });
+  const handleChangeText = (key: string) => (text: string) => {
+    setUserForms({ ...userForms, [key]: text });
   };
 
   const handleChangeDate = (key: string) => (date: Date) => {
     setUserForms({ ...userForms, [key]: date });
   };
 
-  const handleChangeSelect = (key: string) => (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setUserForms({ ...userForms, [key]: Object.values(RoleEnum)[event.target.selectedIndex] });
+  const handleChangeSelect = (key: string) => (selectedIndex: number) => {
+    setUserForms({ ...userForms, [key]: Object.values(RoleEnum)[selectedIndex] });
   };
 
   return (
@@ -109,7 +110,7 @@ export const FrontPage = () => {
               onChange={handleChangeText('email')}
             />
 
-            <TextInput
+            <PhoneInput
               label={frontPageTranslations.phone}
               value={userForms.phone}
               name={'phone'}
