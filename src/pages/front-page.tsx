@@ -79,7 +79,7 @@ export const FrontPage = () => {
   };
 
   const handleChangeSelect = (key: string) => (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setUserForms({ ...userForms, [key]: event.target.value as RoleEnum });
+    setUserForms({ ...userForms, [key]: Object.values(RoleEnum)[event.target.selectedIndex] });
   };
 
   return (
@@ -135,8 +135,8 @@ export const FrontPage = () => {
 
             {formsErrors.length > 0 && (
               <div className='FrontPage__forms-errors'>
-                {formsErrors.map((error) => (
-                  <Text type='error' key={error}>
+                {formsErrors.map((error, i) => (
+                  <Text type='error' key={i}>
                     {error}
                   </Text>
                 ))}
