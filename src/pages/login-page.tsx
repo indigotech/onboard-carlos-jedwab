@@ -7,12 +7,13 @@ import { TextInput } from '../components/text-input';
 import { Button } from '../components/button';
 
 import { translations } from '../helpers/translations';
-import { validateEmail, validatePassword } from '../helpers/login-validation';
+import { validateEmail, validatePassword } from '../helpers/validations';
 
 import { loginUserMutation } from '../graphql/mutations/login-user-mutation';
 import { ApolloError } from '@apollo/client';
 
 const loginTranslations = translations.pt.login;
+const errorTranslations = translations.pt.error;
 
 export const LoginPage = () => {
   const [email, setEmail] = React.useState('');
@@ -38,8 +39,7 @@ export const LoginPage = () => {
     setEmailError(emailValidation);
     setPasswordError(passwordValidation);
     setInternalError('');
-    const isValid = emailValidation === '' && passwordValidation === '';
-    return isValid;
+    return emailValidation === '' && passwordValidation === '';
   };
 
   const tryLogin = async (email: string, password: string) => {
@@ -53,13 +53,13 @@ export const LoginPage = () => {
       if (errors instanceof ApolloError) {
         errors.graphQLErrors.forEach((error) => {
           if (error.extensions.code === 'INTERNAL_SERVER_ERROR') {
-            setInternalError(loginTranslations.error.invalidCredentials);
+            setInternalError(errorTranslations.invalidCredentials);
           } else {
             setInternalError(error.message);
           }
         });
       } else {
-        setInternalError(loginTranslations.error.unknownError);
+        setInternalError(errorTranslations.unknownError);
       }
     }
     setIsLoading(false);

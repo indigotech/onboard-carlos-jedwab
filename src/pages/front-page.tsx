@@ -11,6 +11,7 @@ import { InfiniteScroll } from '../components/infinite-scroll';
 import { User, useUsers } from '../graphql/queries/use-users';
 
 import { translations } from '../helpers/translations';
+import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from '../helpers/validations';
 
 enum RoleEnum {
   ADMIN = 'admin',
@@ -41,6 +42,7 @@ export const FrontPage = () => {
     }
   };
   const { hasMore, error, loading } = useUsers(page, onCompleted);
+  const [formsErrors, setFormsErrors] = React.useState<string[]>([]);
   const [userForms, setUserForms] = React.useState<UserForms>({
     name: '',
     email: '',
@@ -54,9 +56,22 @@ export const FrontPage = () => {
     setPage((prev) => prev + pageSize);
   };
 
+  const validate = (userForms: UserForms) => {
+    const newErrors: string[] = [];
+    newErrors.push(validateName(userForms.name));
+    newErrors.push(validateEmail(userForms.email));
+    newErrors.push(validatePhone(userForms.phone));
+    newErrors.push(validateDate(userForms.birthDate));
+    newErrors.push(validatePassword(userForms.password));
+    setFormsErrors(newErrors);
+    return newErrors.filter((error) => error !== '').length === 0;
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(userForms);
+    if (validate(userForms)) {
+      alert(JSON.stringify(userForms));
+    }
   };
 
   const handleChangeText = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -117,6 +132,16 @@ export const FrontPage = () => {
               value={userForms.role}
               onChange={handleChangeSelect('role')}
             />
+
+            {formsErrors.length > 0 && (
+              <div className='FrontPage__forms-errors'>
+                {formsErrors.map((error) => (
+                  <Text type='error' key={error}>
+                    {error}
+                  </Text>
+                ))}
+              </div>
+            )}
 
             <Button label={frontPageTranslations.submit} type='submit' isLoading={false} />
           </form>
