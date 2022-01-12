@@ -3,6 +3,7 @@ import React from 'react';
 import { Text } from '../components/text';
 import { Button } from '../components/button';
 import { TextInput } from '../components/text-input';
+import { DateInput } from '../components/date-input';
 import { SelectInput } from '../components/select-input';
 import { Spinner } from '../components/spinner';
 import { Table, RowType } from '../components/table';
@@ -22,7 +23,7 @@ type UserType = {
   name: string;
   email: string;
   phone: string;
-  birthDate: string;
+  birthDate: Date;
   password: string;
   role: RoleEnum;
 };
@@ -47,7 +48,7 @@ export const FrontPage = () => {
     name: '',
     email: '',
     phone: '',
-    birthDate: '',
+    birthDate: new Date(),
     password: '',
     role: RoleEnum.USER,
   });
@@ -76,6 +77,10 @@ export const FrontPage = () => {
 
   const handleChangeText = (key: string) => (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserForms({ ...userForms, [key]: event.target.value });
+  };
+
+  const handleChangeDate = (key: string) => (date: Date) => {
+    setUserForms({ ...userForms, [key]: date });
   };
 
   const handleChangeSelect = (key: string) => (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -111,11 +116,11 @@ export const FrontPage = () => {
               onChange={handleChangeText('phone')}
             />
 
-            <TextInput
+            <DateInput
               label={frontPageTranslations.birthDate}
               value={userForms.birthDate}
               name={'birthDate'}
-              onChange={handleChangeText('birthDate')}
+              onChange={handleChangeDate('birthDate')}
             />
 
             <TextInput
