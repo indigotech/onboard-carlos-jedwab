@@ -12,6 +12,7 @@ export const translations = {
       invalidPhone: 'Formato de telefone inválido',
       missingDate: 'A data deve ser fornecida',
       invalidDate: 'Formato de data inválido',
+      futureDate: 'A data deve ser anterior a data de hoje',
       missingName: 'O nome deve ser fornecido',
     },
     login: {

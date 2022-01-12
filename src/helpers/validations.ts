@@ -25,6 +25,16 @@ const isDate = (value: string) => {
   return pattern.test(value);
 };
 
+const isFutureDate = (value: string) => {
+  const dd = value.split('/')[0];
+  const mm = value.split('/')[1];
+  const yyyy = value.split('/')[2];
+  const mmddyyyy = mm + '/' + dd + '/' + yyyy;
+  const date = new Date(mmddyyyy);
+  const now = new Date();
+  return date > now;
+};
+
 const hasLetterAndNumber = (value: string) => {
   const pattern = new RegExp(/^(?=.*[0-9])(?=.*[A-Za-z])/);
   return pattern.test(value);
@@ -76,6 +86,9 @@ export const validateDate = (date: string) => {
   }
   if (!isDate(date)) {
     return errorTranslations.invalidDate;
+  }
+  if (isFutureDate(date)) {
+    return errorTranslations.futureDate;
   }
   return '';
 };
