@@ -133,7 +133,7 @@ export const FrontPage = () => {
 
             <SelectInput
               label={frontPageTranslations.role}
-              name={'Função'}
+              name={'role'}
               options={Object.values(RoleEnum)}
               value={userForms.role}
               onChange={handleChangeSelect('role')}

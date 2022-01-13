@@ -4,26 +4,21 @@ const isPositive = (value: string) => {
 
 export const toDate = (textDate: string) => {
   const today = new Date();
+  let [dd, mm, yyyy] = textDate.split('/');
 
-  let dd = textDate.split('/')[0];
-  dd = isPositive(dd) ? dd : today.getDate().toPrecision().padStart(2, '0');
+  dd = isPositive(dd) ? dd : today.getDate().toString().padStart(2, '0');
+  mm = isPositive(mm) ? mm : (today.getMonth() + 1).toString().padStart(2, '0');
+  yyyy = isPositive(yyyy) ? yyyy : today.getFullYear().toString().padStart(4, '0');
 
-  let mm = textDate.split('/')[1];
-  mm = isPositive(mm) ? mm : (today.getMonth() + 1).toPrecision().padStart(2, '0');
-
-  let yyyy = textDate.split('/')[2];
-  yyyy = isPositive(yyyy) ? yyyy : today.getFullYear().toPrecision().padStart(4, '0');
-
-  const mmddyyyy = mm + '/' + dd + '/' + yyyy;
-  return new Date(mmddyyyy);
+  return new Date(`${mm}/${dd}/${yyyy}`);
 };
 
-export const toText = (date: Date) => {
+export const parseDate = (date: Date) => {
   const dd = date.getDate().toPrecision().padStart(2, '0');
   const mm = (date.getMonth() + 1).toPrecision().padStart(2, '0');
   const yyyy = date.getFullYear().toPrecision().padStart(4, '0');
-  const ddmmyyyy = dd + '/' + mm + '/' + yyyy;
-  return ddmmyyyy;
+
+  return dd + '/' + mm + '/' + yyyy;
 };
 
 export const onlyDigits = (value: string) => {
