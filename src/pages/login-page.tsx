@@ -9,8 +9,10 @@ import { Button } from '../components/button';
 import { translations } from '../helpers/translations';
 import { validateEmail, validatePassword } from '../helpers/login-validation';
 
-import { loginUser } from '../graphql/mutations/login-user';
+import { loginUserMutation } from '../graphql/mutations/login-user-mutation';
 import { ApolloError } from '@apollo/client';
+
+const loginTranslations = translations.pt.login;
 
 export const LoginPage = () => {
   const [email, setEmail] = React.useState('');
@@ -18,8 +20,6 @@ export const LoginPage = () => {
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
   const [internalError, setInternalError] = React.useState('');
-
-  const loginTranslations = translations.pt.login;
   const [isLoading, setIsLoading] = React.useState(false);
 
   const navigate = useNavigate();
@@ -45,9 +45,9 @@ export const LoginPage = () => {
   const tryLogin = async (email: string, password: string) => {
     setIsLoading(true);
     try {
-      const result = await loginUser(email, password);
+      const result = await loginUserMutation(email, password);
       const token = result.data.login.token;
-      window.localStorage.setItem('token', token);
+      localStorage.setItem('token', token);
       navigate('/front_page');
     } catch (errors) {
       if (errors instanceof ApolloError) {
@@ -75,18 +75,18 @@ export const LoginPage = () => {
   return (
     <div className='LoginBox'>
       <div className='LoginBox__title'>
-        <Text type='header'>{translations.pt.login.welcome}</Text>
+        <Text type='header'>{loginTranslations.welcome}</Text>
       </div>
 
       <form className='LoginBox__content' onSubmit={onSubmit}>
-        <TextInput label={translations.pt.login.email} value={email} onChange={onChangeEmail} />
-        <TextInput label={translations.pt.login.password} value={password} onChange={onChangePassword} />
+        <TextInput label={loginTranslations.email} value={email} name='email' onChange={onChangeEmail} />
+        <TextInput label={loginTranslations.password} value={password} name='password' onChange={onChangePassword} />
 
         {emailError !== '' && <Text type='error'>{emailError}</Text>}
         {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
         {internalError !== '' && <Text type='error'>{internalError}</Text>}
 
-        <Button label={translations.pt.login.submit} type='submit' isLoading={isLoading} />
+        <Button label={loginTranslations.submit} type='submit' isLoading={isLoading} />
       </form>
     </div>
   );

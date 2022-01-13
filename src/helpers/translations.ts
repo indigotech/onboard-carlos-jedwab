@@ -20,6 +20,7 @@ export const translations = {
       subtitle: 'Aqui você pode ver a lista de usuários',
       name: 'Nome',
       email: 'Email',
+      noMoreUsers: 'Fim da lista',
     },
   },
 };
