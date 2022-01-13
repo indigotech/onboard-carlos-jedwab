@@ -3,7 +3,6 @@ import './style.css';
 
 import { Text } from './text';
 
-export type HeaderType = string[];
 export type RowType = { name: string; email: string };
 
 interface TableProps {

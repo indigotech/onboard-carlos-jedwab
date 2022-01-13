@@ -29,5 +29,12 @@
 }
 
 .FrontPage__table {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 80%;
+}
+
+.FrontPage__forms {
+  width: 200px;
 }
