@@ -19,22 +19,3 @@
   padding: 10px;
   width: 200px;
 }
-
-.FrontPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  min-width: 500px;
-}
-
-.FrontPage__table {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 80%;
-}
-
-.FrontPage__forms {
-  width: 200px;
-}

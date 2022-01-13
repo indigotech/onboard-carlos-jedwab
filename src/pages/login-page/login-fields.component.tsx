@@ -9,12 +9,20 @@ import { translations } from 'helpers/translations';
 import { validateEmail, validatePassword } from 'helpers/validations';
 import { useLogin } from 'hooks/use-login';
 
+interface LoginFieldsProps {
+  loginForms: {
+    email: string;
+    password: string;
+  };
+  onChange: (key: string) => (text: string) => void;
+}
+
 const loginTranslations = translations.pt.login;
 const errorTranslations = translations.pt.error;
 
-export const LoginPage = () => {
-  const [email, setEmail] = React.useState('');
-  const [password, setPassword] = React.useState('');
+export const LoginFields = (props: LoginFieldsProps) => {
+  const { loginForms, onChange } = props;
+
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
   const [internalError, setInternalError] = React.useState('');
@@ -36,7 +44,7 @@ export const LoginPage = () => {
     }
   };
 
-  const { login, loading } = useLogin(email, password, handleCompleted, handleError);
+  const { login, loading } = useLogin(loginForms.email, loginForms.password, handleCompleted, handleError);
 
   const validate = (email: string, password: string) => {
     const emailValidation = validateEmail(email);
@@ -49,27 +57,26 @@ export const LoginPage = () => {
 
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (validate(email, password)) {
+    if (validate(loginForms.email, loginForms.password)) {
       login();
     }
   };
 
   return (
-    <div className='LoginBox'>
-      <div className='LoginBox__title'>
-        <Text type='header'>{loginTranslations.welcome}</Text>
-      </div>
+    <form onSubmit={onSubmit}>
+      <TextInput label={loginTranslations.email} value={loginForms.email} name='email' onChange={onChange('email')} />
+      <TextInput
+        label={loginTranslations.password}
+        value={loginForms.password}
+        name='password'
+        onChange={onChange('password')}
+      />
 
-      <form className='LoginBox__content' onSubmit={onSubmit}>
-        <TextInput label={loginTranslations.email} value={email} name='email' onChange={setEmail} />
-        <TextInput label={loginTranslations.password} value={password} name='password' onChange={setPassword} />
+      {emailError !== '' && <Text type='error'>{emailError}</Text>}
+      {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
+      {internalError !== '' && <Text type='error'>{internalError}</Text>}
 
-        {emailError !== '' && <Text type='error'>{emailError}</Text>}
-        {passwordError !== '' && <Text type='error'>{passwordError}</Text>}
-        {internalError !== '' && <Text type='error'>{internalError}</Text>}
-
-        <Button label={loginTranslations.submit} type='submit' isLoading={loading} />
-      </form>
-    </div>
+      <Button label={loginTranslations.submit} type='submit' isLoading={loading} />
+    </form>
   );
 };
