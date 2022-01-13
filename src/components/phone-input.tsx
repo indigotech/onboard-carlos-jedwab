@@ -2,8 +2,7 @@ import React from 'react';
 import './style.css';
 
 import { Text } from './text';
-
-import { onlyDigits } from '../helpers/formatting';
+import { onlyDigits } from 'helpers/formatting';
 
 interface PhoneInputProps {
   label: string;

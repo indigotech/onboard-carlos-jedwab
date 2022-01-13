@@ -1,19 +1,17 @@
 import React from 'react';
 
-import { Text } from '../components/text';
-import { Button } from '../components/button';
-import { TextInput } from '../components/text-input';
-import { DateInput } from '../components/date-input';
-import { PhoneInput } from '../components/phone-input';
-import { SelectInput } from '../components/select-input';
-import { Spinner } from '../components/spinner';
-import { Table, RowType } from '../components/table';
-import { InfiniteScroll } from '../components/infinite-scroll';
-
-import { User, useUsers } from '../hooks/use-users';
-
-import { translations } from '../helpers/translations';
-import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from '../helpers/validations';
+import { Text } from 'components/text';
+import { Button } from 'components/button';
+import { TextInput } from 'components/text-input';
+import { DateInput } from 'components/date-input';
+import { PhoneInput } from 'components/phone-input';
+import { SelectInput } from 'components/select-input';
+import { Spinner } from 'components/spinner';
+import { Table, RowType } from 'components/table';
+import { InfiniteScroll } from 'components/infinite-scroll';
+import { User, useUsers } from 'hooks/use-users';
+import { translations } from 'helpers/translations';
+import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from 'helpers/validations';
 
 enum RoleEnum {
   ADMIN = 'admin',

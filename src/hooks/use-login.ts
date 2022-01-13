@@ -1,6 +1,6 @@
 import { ApolloError, useMutation } from '@apollo/client';
 
-import { LOGIN_MUTATION } from '../graphql/mutations';
+import { LOGIN_MUTATION } from 'graphql/mutations';
 
 interface LoginData {
   login: {

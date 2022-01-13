@@ -2,14 +2,12 @@ import React from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 
-import { Text } from '../components/text';
-import { TextInput } from '../components/text-input';
-import { Button } from '../components/button';
-
-import { translations } from '../helpers/translations';
-import { validateEmail, validatePassword } from '../helpers/validations';
-
-import { useLogin } from '../hooks/use-login';
+import { Text } from 'components/text';
+import { TextInput } from 'components/text-input';
+import { Button } from 'components/button';
+import { translations } from 'helpers/translations';
+import { validateEmail, validatePassword } from 'helpers/validations';
+import { useLogin } from 'hooks/use-login';
 
 const loginTranslations = translations.pt.login;
 const errorTranslations = translations.pt.error;
