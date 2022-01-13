@@ -33,7 +33,7 @@ export const UserList = (props: UserListProps) => {
 
   const handleError = (message: string, code: string) => {
     if (code === 'INTERNAL_SERVER_ERROR' || code === 'UNAUTHORIZED') {
-      setInternalError(errorTranslations.invalidCredentials);
+      setInternalError(errorTranslations.unauthorized);
     } else {
       setInternalError(message);
     }

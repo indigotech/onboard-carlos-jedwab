@@ -27,6 +27,12 @@
   font-weight: bold;
 }
 
+.TextLabel__success {
+  color: #0f0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
 .TextInput {
   width: 100%;
 }

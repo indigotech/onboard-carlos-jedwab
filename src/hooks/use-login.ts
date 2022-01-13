@@ -28,7 +28,7 @@ export const useLogin = (
 
   const handleError = (error: ApolloError) => {
     const message = error.message;
-    const code = `${error.graphQLErrors[0].extensions.code}`;
+    const code = `${error.graphQLErrors[0]?.extensions.code}`;
     onError(message, code);
   };
 

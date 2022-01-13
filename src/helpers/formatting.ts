@@ -13,12 +13,16 @@ export const toDate = (textDate: string) => {
   return new Date(`${mm}/${dd}/${yyyy}`);
 };
 
-export const parseDate = (date: Date) => {
+export const parseDate = (date: Date, format: 'normal' | 'standard') => {
   const dd = date.getDate().toPrecision().padStart(2, '0');
   const mm = (date.getMonth() + 1).toPrecision().padStart(2, '0');
   const yyyy = date.getFullYear().toPrecision().padStart(4, '0');
 
-  return dd + '/' + mm + '/' + yyyy;
+  if (format === 'standard') {
+    return `${yyyy}-${mm}-${dd}`;
+  } else if (format === 'normal') {
+    return `${dd}/${mm}/${yyyy}`;
+  }
 };
 
 export const onlyDigits = (value: string) => {

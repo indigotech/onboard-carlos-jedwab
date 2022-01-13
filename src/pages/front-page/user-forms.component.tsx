@@ -7,6 +7,7 @@ import { TextInput } from 'components/text-input';
 import { DateInput } from 'components/date-input';
 import { PhoneInput } from 'components/phone-input';
 import { SelectInput } from 'components/select-input';
+import { useCreateUser } from 'hooks/use-create-user';
 import { translations } from 'helpers/translations';
 import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from 'helpers/validations';
 
@@ -37,7 +38,29 @@ const initialUserForms: UserType = {
 
 export const UserForms = () => {
   const [formsErrors, setFormsErrors] = React.useState<string[]>([]);
+  const [formsSuccess, setFormsSuccess] = React.useState<string>('');
   const [userForms, setUserForms] = React.useState<UserType>(initialUserForms);
+
+  const handleCompleted = () => {
+    setFormsSuccess(frontPageTranslations.userCreated);
+    setFormsErrors([]);
+    setUserForms(initialUserForms);
+  };
+
+  const handleError = (message: string) => {
+    setFormsErrors((errors) => [...errors, message]);
+  };
+
+  const { createUser, loading } = useCreateUser(
+    userForms.name,
+    userForms.email,
+    userForms.phone,
+    userForms.birthDate,
+    userForms.password,
+    userForms.role,
+    handleCompleted,
+    handleError,
+  );
 
   const validate = (userForms: UserType) => {
     const newErrors: string[] = [];
@@ -52,8 +75,10 @@ export const UserForms = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    setFormsErrors([]);
+    setFormsSuccess('');
     if (validate(userForms)) {
-      alert(JSON.stringify(userForms));
+      createUser();
     }
   };
 
@@ -124,7 +149,13 @@ export const UserForms = () => {
         </div>
       )}
 
-      <Button label={frontPageTranslations.submit} type='submit' isLoading={false} />
+      {formsSuccess !== '' && (
+        <div className='FrontPage__forms-success'>
+          <Text type='success'>{formsSuccess}</Text>
+        </div>
+      )}
+
+      <Button label={frontPageTranslations.submit} type='submit' isLoading={loading} />
     </form>
   );
 };
