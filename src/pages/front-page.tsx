@@ -10,7 +10,7 @@ import { Spinner } from '../components/spinner';
 import { Table, RowType } from '../components/table';
 import { InfiniteScroll } from '../components/infinite-scroll';
 
-import { User, useUsers } from '../graphql/queries/use-users';
+import { User, useUsers } from '../hooks/use-users';
 
 import { translations } from '../helpers/translations';
 import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from '../helpers/validations';
@@ -30,29 +30,42 @@ type UserType = {
 };
 
 const frontPageTranslations = translations.pt.front_page;
+const errorTranslations = translations.pt.error;
+
 const usersTableHeader = ['Nome', 'Email'];
-const initialPage = 0;
 const pageSize = 10;
+const initialPage = 0;
+const initialUserForms: UserType = {
+  name: '',
+  email: '',
+  phone: '',
+  birthDate: new Date(),
+  password: '',
+  role: RoleEnum.USER,
+};
 
 export const FrontPage = () => {
   const [rows, setRows] = React.useState<RowType[]>([]);
   const [page, setPage] = React.useState(initialPage);
+  const [hasMore, setHasMore] = React.useState(true);
   const [formsErrors, setFormsErrors] = React.useState<string[]>([]);
-  const [userForms, setUserForms] = React.useState<UserType>({
-    name: '',
-    email: '',
-    phone: '',
-    birthDate: new Date(),
-    password: '',
-    role: RoleEnum.USER,
-  });
+  const [internalError, setInternalError] = React.useState('');
+  const [userForms, setUserForms] = React.useState<UserType>(initialUserForms);
 
-  const onCompleted = (newUsers: User[]) => {
-    if (newUsers) {
-      setRows((prev) => [...prev, ...newUsers]);
+  const handleCompleted = (newUsers: User[], hasMore: boolean) => {
+    setRows((prev) => [...prev, ...newUsers]);
+    setHasMore(hasMore);
+  };
+
+  const handleError = (message: string, code: string) => {
+    if (code === 'INTERNAL_SERVER_ERROR' || code === 'UNAUTHORIZED') {
+      setInternalError(errorTranslations.invalidCredentials);
+    } else {
+      setInternalError(message);
     }
   };
-  const { hasMore, error, loading } = useUsers(page, onCompleted);
+
+  const { loading } = useUsers(page, handleCompleted, handleError);
 
   const handleBottomHit = () => {
     setPage((prev) => prev + pageSize);
@@ -93,7 +106,7 @@ export const FrontPage = () => {
       <Text type='header'>{frontPageTranslations.title}</Text>
       <Text type='label'>{frontPageTranslations.subtitle}</Text>
 
-      {error === undefined ? (
+      {internalError === '' ? (
         <div className='FrontPage__table'>
           <form className='FrontPage__forms' onSubmit={handleSubmit}>
             <TextInput
@@ -162,7 +175,7 @@ export const FrontPage = () => {
           </InfiniteScroll>
         </div>
       ) : (
-        <Text type='error'>{error.message}</Text>
+        <Text type='error'>{internalError}</Text>
       )}
     </div>
   );
