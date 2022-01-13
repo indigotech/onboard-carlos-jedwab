@@ -37,13 +37,6 @@ const pageSize = 10;
 export const FrontPage = () => {
   const [rows, setRows] = React.useState<RowType[]>([]);
   const [page, setPage] = React.useState(initialPage);
-
-  const onCompleted = (newUsers: User[]) => {
-    if (newUsers) {
-      setRows((prev) => [...prev, ...newUsers]);
-    }
-  };
-  const { hasMore, error, loading } = useUsers(page, onCompleted);
   const [formsErrors, setFormsErrors] = React.useState<string[]>([]);
   const [userForms, setUserForms] = React.useState<UserType>({
     name: '',
@@ -53,6 +46,13 @@ export const FrontPage = () => {
     password: '',
     role: RoleEnum.USER,
   });
+
+  const onCompleted = (newUsers: User[]) => {
+    if (newUsers) {
+      setRows((prev) => [...prev, ...newUsers]);
+    }
+  };
+  const { hasMore, error, loading } = useUsers(page, onCompleted);
 
   const handleBottomHit = () => {
     setPage((prev) => prev + pageSize);
