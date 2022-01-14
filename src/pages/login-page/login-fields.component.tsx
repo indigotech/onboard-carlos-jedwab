@@ -44,7 +44,7 @@ export const LoginFields = (props: LoginFieldsProps) => {
     }
   };
 
-  const { login, loading } = useLogin(loginForms.email, loginForms.password, handleCompleted, handleError);
+  const { login, loading } = useLogin(handleCompleted, handleError);
 
   const validate = (email: string, password: string) => {
     const emailValidation = validateEmail(email);
@@ -58,7 +58,14 @@ export const LoginFields = (props: LoginFieldsProps) => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (validate(loginForms.email, loginForms.password)) {
-      login();
+      login({
+        variables: {
+          data: {
+            email: loginForms.email,
+            password: loginForms.password,
+          },
+        },
+      });
     }
   };
 

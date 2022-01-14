@@ -10,6 +10,7 @@ import { SelectInput } from 'components/select-input';
 import { useCreateUser } from 'hooks/use-create-user';
 import { translations } from 'helpers/translations';
 import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from 'helpers/validations';
+import { parseDate } from 'helpers/formatting';
 
 enum RoleEnum {
   ADMIN = 'admin',
@@ -51,16 +52,7 @@ export const UserForms = () => {
     setFormsErrors((errors) => [...errors, message]);
   };
 
-  const { createUser, loading } = useCreateUser(
-    userForms.name,
-    userForms.email,
-    userForms.phone,
-    userForms.birthDate,
-    userForms.password,
-    userForms.role,
-    handleCompleted,
-    handleError,
-  );
+  const { createUser, loading } = useCreateUser(handleCompleted, handleError);
 
   const validate = (userForms: UserType) => {
     const newErrors: string[] = [];
@@ -75,10 +67,17 @@ export const UserForms = () => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setFormsErrors([]);
     setFormsSuccess('');
     if (validate(userForms)) {
-      createUser();
+      const birthDateString = parseDate(userForms.birthDate, { format: 'yyyy-mm-dd' });
+      createUser({
+        variables: {
+          data: {
+            ...userForms,
+            birthDate: birthDateString,
+          },
+        },
+      });
     }
   };
 

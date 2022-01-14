@@ -15,12 +15,7 @@ interface LoginVars {
   };
 }
 
-export const useLogin = (
-  email: string,
-  password: string,
-  onCompleted: (token: string) => void,
-  onError: (message: string, code: string) => void,
-) => {
+export const useLogin = (onCompleted: (token: string) => void, onError: (message: string, code: string) => void) => {
   const handleCompleted = (data: LoginData) => {
     const token = data?.login.token;
     onCompleted(token);
@@ -36,12 +31,6 @@ export const useLogin = (
     notifyOnNetworkStatusChange: true,
     onCompleted: handleCompleted,
     onError: handleError,
-    variables: {
-      data: {
-        email,
-        password,
-      },
-    },
   });
 
   return {

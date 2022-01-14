@@ -13,7 +13,7 @@ interface DateInputProps {
 }
 
 export const DateInput = (props: DateInputProps) => {
-  const [textDate, setTextDate] = React.useState(parseDate(props.value, 'normal'));
+  const [textDate, setTextDate] = React.useState(parseDate(props.value, { format: 'dd/mm/yyyy' }));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const date = toDate(event.target.value);
@@ -26,7 +26,7 @@ export const DateInput = (props: DateInputProps) => {
   const handleBlur = (event: React.FocusEvent<HTMLInputElement>) => {
     const date = toDate(event.target.value);
     if (isDate(date)) {
-      setTextDate(parseDate(date, 'normal'));
+      setTextDate(parseDate(date, { format: 'dd/mm/yyyy' }));
     }
   };
 

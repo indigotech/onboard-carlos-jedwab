@@ -1,3 +1,7 @@
+interface ParseDateOptions {
+  format: 'yyyy-mm-dd' | 'dd/mm/yyyy';
+}
+
 const isPositive = (value: string) => {
   return Number(value) > 0;
 };
@@ -13,16 +17,17 @@ export const toDate = (textDate: string) => {
   return new Date(`${mm}/${dd}/${yyyy}`);
 };
 
-export const parseDate = (date: Date, format: 'normal' | 'standard') => {
+export const parseDate = (date: Date, options: ParseDateOptions) => {
   const dd = date.getDate().toPrecision().padStart(2, '0');
   const mm = (date.getMonth() + 1).toPrecision().padStart(2, '0');
   const yyyy = date.getFullYear().toPrecision().padStart(4, '0');
 
-  if (format === 'standard') {
+  if (options.format === 'yyyy-mm-dd') {
     return `${yyyy}-${mm}-${dd}`;
-  } else if (format === 'normal') {
+  } else if (options.format === 'dd/mm/yyyy') {
     return `${dd}/${mm}/${yyyy}`;
   }
+  return '';
 };
 
 export const onlyDigits = (value: string) => {
