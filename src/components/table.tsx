@@ -6,9 +6,12 @@ import { Text } from './text';
 interface TableProps {
   header: string[];
   rows: string[][];
+  onClickItem?: (rowIndex: number) => void;
 }
 
 export const Table = (props: TableProps) => {
+  const { onClickItem } = props;
+
   return (
     <div className='Table'>
       <div className='Table__header'>
@@ -19,15 +22,25 @@ export const Table = (props: TableProps) => {
         ))}
       </div>
 
-      {props.rows.map((row, i) => (
-        <div className='Table__row' key={i}>
-          {row.map((item, j) => (
-            <div className='Table__item' key={j}>
-              <Text type={'label'}>{item}</Text>
+      {onClickItem === undefined
+        ? props.rows.map((row, i) => (
+            <div className='Table__row' key={i}>
+              {row.map((item, j) => (
+                <div className='Table__item' key={j}>
+                  <Text type={'label'}>{item}</Text>
+                </div>
+              ))}
             </div>
+          ))
+        : props.rows.map((row, i) => (
+            <button className='Table__row' key={i} onClick={() => onClickItem(i)}>
+              {row.map((item, j) => (
+                <div className='Table__item' key={j}>
+                  <Text type={'label'}>{item}</Text>
+                </div>
+              ))}
+            </button>
           ))}
-        </div>
-      ))}
     </div>
   );
 };

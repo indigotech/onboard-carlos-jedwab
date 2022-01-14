@@ -118,6 +118,10 @@
   width: 100%;
 }
 
+.Table__row.Button {
+  cursor: pointer;
+}
+
 .Table__item {
   display: flex;
   justify-content: flex-start;
