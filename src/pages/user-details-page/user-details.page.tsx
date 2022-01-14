@@ -9,7 +9,7 @@ import { UserInfo } from './user-info.component';
 
 const detailsPageTranslations = translations.pt.details_page;
 
-export const DetailsPage = () => {
+export const UserDetailsPage = () => {
   const [internalError, setInternalError] = React.useState('');
 
   const params = useParams();

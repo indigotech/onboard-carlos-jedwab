@@ -1,2 +1,1 @@
-import { LoginPage } from './login.page';
-export default LoginPage;
+export * from './login.page';

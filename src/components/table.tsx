@@ -22,7 +22,7 @@ export const Table = (props: TableProps) => {
         ))}
       </div>
 
-      {onClickItem === undefined
+      {!onClickItem
         ? props.rows.map((row, i) => (
             <div className='Table__row' key={i}>
               {row.map((item, j) => (

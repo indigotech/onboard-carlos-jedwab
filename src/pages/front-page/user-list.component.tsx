@@ -53,7 +53,7 @@ export const UserList = (props: UserListProps) => {
 
   const handleClickItem = (rowId: number) => {
     const id = users[rowId].id;
-    navigate(`/details/${id}`);
+    navigate(`/user_details/${id}`);
   };
 
   return (
