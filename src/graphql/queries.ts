@@ -5,9 +5,22 @@ export const USERS_QUERY = gql`
     users(pageInfo: $pageInfo) {
       count
       nodes {
+        id
         name
         email
       }
+    }
+  }
+`;
+
+export const USER_QUERY = gql`
+  query USE_USER($id: ID!) {
+    user(id: $id) {
+      name
+      email
+      phone
+      birthDate
+      role
     }
   }
 `;

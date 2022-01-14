@@ -3,7 +3,7 @@ import './style.css';
 
 import { Text } from 'components/text';
 import { Spinner } from 'components/spinner';
-import { Table, RowType } from 'components/table';
+import { Table } from 'components/table';
 import { InfiniteScroll } from 'components/infinite-scroll';
 import { User, useUsers } from 'hooks/use-users';
 import { translations } from 'helpers/translations';
@@ -22,12 +22,13 @@ const initialPage = 0;
 export const UserList = (props: UserListProps) => {
   const { setInternalError } = props;
 
-  const [rows, setRows] = React.useState<RowType[]>([]);
+  const [rows, setRows] = React.useState<string[][]>([]);
   const [page, setPage] = React.useState(initialPage);
   const [hasMore, setHasMore] = React.useState(true);
 
   const handleCompleted = (newUsers: User[], hasMore: boolean) => {
-    setRows((prev) => [...prev, ...newUsers]);
+    const newRows: string[][] = newUsers.map((user) => [user.name, user.email]);
+    setRows((prev) => [...prev, ...newRows]);
     setHasMore(hasMore);
   };
 

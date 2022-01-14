@@ -35,5 +35,16 @@ export const translations = {
       submit: 'Cadastrar',
       userCreated: 'Usuário criado com sucesso!',
     },
+    details_page: {
+      title: 'Detalhes do usuário',
+      subtitle: 'Aqui você pode ver os detalhes do usuário',
+      header: 'Dados',
+      name: 'Nome',
+      email: 'Email',
+      phone: 'Telefone',
+      birthDate: 'Data de nascimento',
+      password: 'Senha',
+      role: 'Função',
+    },
   },
 };

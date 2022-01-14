@@ -3,6 +3,7 @@ import { ApolloError, useQuery } from '@apollo/client';
 import { USERS_QUERY } from 'graphql/queries';
 
 export interface User {
+  id: number;
   name: string;
   email: string;
 }

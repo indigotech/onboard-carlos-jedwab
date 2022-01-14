@@ -3,11 +3,9 @@ import './style.css';
 
 import { Text } from './text';
 
-export type RowType = { name: string; email: string };
-
 interface TableProps {
   header: string[];
-  rows: RowType[];
+  rows: string[][];
 }
 
 export const Table = (props: TableProps) => {
@@ -23,12 +21,11 @@ export const Table = (props: TableProps) => {
 
       {props.rows.map((row, i) => (
         <div className='Table__row' key={i}>
-          <div className='Table__item'>
-            <Text type={'label'}>{row.name}</Text>
-          </div>
-          <div className='Table__item'>
-            <Text type={'label'}>{row.email}</Text>
-          </div>
+          {row.map((item, j) => (
+            <div className='Table__item' key={j}>
+              <Text type={'label'}>{item}</Text>
+            </div>
+          ))}
         </div>
       ))}
     </div>
