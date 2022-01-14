@@ -1,5 +1,6 @@
 import React from 'react';
-import './style.css';
+
+import { StyledWrapper } from './atm.infinite-scroll.styles';
 
 type InfiniteScrollProps = {
   onBottomHit: () => void;
@@ -34,9 +35,5 @@ export const InfiniteScroll: React.FC<InfiniteScrollProps> = (props) => {
     return () => document.removeEventListener('scroll', handleLoadMore);
   }, [props]);
 
-  return (
-    <div ref={contentRef} className='InfiniteScroll'>
-      {props.children}
-    </div>
-  );
+  return <StyledWrapper ref={contentRef}>{props.children}</StyledWrapper>;
 };

@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 import { useParams } from 'react-router-dom';
 
-import { Text } from 'components/text';
+import { Text } from 'components/atm.text.component';
 import { translations } from 'helpers/translations';
 
 import { UserInfo } from './user-info.component';
@@ -17,8 +17,8 @@ export const UserDetailsPage = () => {
 
   return (
     <div className='DetailsPage'>
-      <Text type='header'>{detailsPageTranslations.title}</Text>
-      <Text type='label'>{detailsPageTranslations.subtitle}</Text>
+      <Text type='title'>{detailsPageTranslations.title}</Text>
+      <Text type='normal'>{detailsPageTranslations.subtitle}</Text>
 
       {internalError === '' ? (
         <UserInfo id={id} setInternalError={setInternalError} />

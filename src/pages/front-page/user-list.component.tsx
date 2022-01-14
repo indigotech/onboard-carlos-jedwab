@@ -2,10 +2,10 @@ import React from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 
-import { Text } from 'components/text';
-import { Spinner } from 'components/spinner';
-import { Table } from 'components/table';
-import { InfiniteScroll } from 'components/infinite-scroll';
+import { Text } from 'components/atm.text.component';
+import { Spinner } from 'components/atm.spinner.component';
+import { Table } from 'components/mol.table.component';
+import { InfiniteScroll } from 'components/atm.infinite-scroll.component';
 import { useUsers, User } from 'hooks/use-users';
 import { translations } from 'helpers/translations';
 
@@ -59,7 +59,7 @@ export const UserList = (props: UserListProps) => {
   return (
     <InfiniteScroll isLoading={loading} hasMore={hasMore} onBottomHit={handleBottomHit}>
       <Table header={usersTableHeader} rows={rows} onClickItem={handleClickItem} />
-      {hasMore ? loading && <Spinner size='medium' /> : <Text type='label'>{frontPageTranslations.noMoreUsers}</Text>}
+      {hasMore ? loading && <Spinner size='medium' /> : <Text type='normal'>{frontPageTranslations.noMoreUsers}</Text>}
     </InfiniteScroll>
   );
 };

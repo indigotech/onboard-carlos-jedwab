@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-import { Text } from 'components/text';
+import { Text } from 'components/atm.text.component';
 import { translations } from 'helpers/translations';
 
 import { LoginFields } from './login-fields.component';
@@ -21,7 +21,7 @@ export const LoginPage = () => {
   return (
     <div className='LoginBox'>
       <div className='LoginBox__title'>
-        <Text type='header'>{loginTranslations.welcome}</Text>
+        <Text type='title'>{loginTranslations.welcome}</Text>
       </div>
       <div className='LoginBox__content'>
         <LoginFields loginForms={loginForms} onChange={handleChange} />

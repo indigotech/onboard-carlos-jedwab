@@ -1,8 +1,8 @@
 import React from 'react';
 import './style.css';
 
-import { Spinner } from 'components/spinner';
-import { Table } from 'components/table';
+import { Spinner } from 'components/atm.spinner.component';
+import { Table } from 'components/mol.table.component';
 import { useUser, User } from 'hooks/use-user';
 import { translations } from 'helpers/translations';
 import { parseDate } from 'helpers/formatting';
