@@ -1,11 +1,12 @@
 import React from 'react';
 import './style.css';
+import { useNavigate } from 'react-router-dom';
 
 import { Text } from 'components/text';
 import { Spinner } from 'components/spinner';
-import { Table, RowType } from 'components/table';
+import { Table } from 'components/table';
 import { InfiniteScroll } from 'components/infinite-scroll';
-import { User, useUsers } from 'hooks/use-users';
+import { useUsers, User } from 'hooks/use-users';
 import { translations } from 'helpers/translations';
 
 interface UserListProps {
@@ -22,12 +23,17 @@ const initialPage = 0;
 export const UserList = (props: UserListProps) => {
   const { setInternalError } = props;
 
-  const [rows, setRows] = React.useState<RowType[]>([]);
+  const [users, setUsers] = React.useState<User[]>([]);
+  const [rows, setRows] = React.useState<string[][]>([]);
   const [page, setPage] = React.useState(initialPage);
   const [hasMore, setHasMore] = React.useState(true);
 
+  const navigate = useNavigate();
+
   const handleCompleted = (newUsers: User[], hasMore: boolean) => {
-    setRows((prev) => [...prev, ...newUsers]);
+    const newRows: string[][] = newUsers.map((user) => [user.name, user.email]);
+    setRows((prev) => [...prev, ...newRows]);
+    setUsers((prevUsers) => [...prevUsers, ...newUsers]);
     setHasMore(hasMore);
   };
 
@@ -45,9 +51,14 @@ export const UserList = (props: UserListProps) => {
     setPage((prev) => prev + pageSize);
   };
 
+  const handleClickItem = (rowId: number) => {
+    const id = users[rowId].id;
+    navigate(`/user_details/${id}`);
+  };
+
   return (
     <InfiniteScroll isLoading={loading} hasMore={hasMore} onBottomHit={handleBottomHit}>
-      <Table header={usersTableHeader} rows={rows} />
+      <Table header={usersTableHeader} rows={rows} onClickItem={handleClickItem} />
       {hasMore ? loading && <Spinner size='medium' /> : <Text type='label'>{frontPageTranslations.noMoreUsers}</Text>}
     </InfiniteScroll>
   );

@@ -2,8 +2,9 @@ import React from 'react';
 import './style.css';
 
 import { Text } from 'components/text';
-import { LoginFields } from './login-fields.component';
 import { translations } from 'helpers/translations';
+
+import { LoginFields } from './login-fields.component';
 
 const loginTranslations = translations.pt.login;
 
