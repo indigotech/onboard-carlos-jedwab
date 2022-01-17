@@ -1,13 +1,14 @@
 import styled, { keyframes } from 'styled-components';
+import { imgSize } from 'global-styles';
 
 const handleWidth = (width: string | number | undefined) => {
   switch (width) {
     case 'small':
-      return '25px';
+      return imgSize.small;
     case 'medium':
-      return '40px';
+      return imgSize.medium;
     case 'large':
-      return '60px';
+      return imgSize.large;
     default:
       return width;
   }

@@ -1,12 +1,13 @@
 import styled from 'styled-components';
+import { colors, margins, boxHeights, fontSizes, fontWeights } from 'global-styles';
 
 export const StyledSelect = styled.select`
-  font-size: 16px;
-  font-weight: normal;
-  color: #000;
+  font-size: ${fontSizes.medium};
+  font-weight: ${fontWeights.regular};
+  color: ${colors.black};
   width: 100%;
-  border: 1px solid black;
-  height: 24px;
+  border: 1px solid ${colors.black};
+  height: ${boxHeights.text};
 `;
 
 export const StyledWrapper = styled.div`
@@ -14,6 +15,6 @@ export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 6px;
-  margin-bottom: 6px;
+  margin-top: ${margins.small};
+  margin-bottom: ${margins.small};
 `;

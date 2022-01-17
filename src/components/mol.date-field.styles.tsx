@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { margins } from 'global-styles';
 
 export const StyledLabelWrapper = styled.div`
   display: flex;
@@ -11,6 +12,6 @@ export const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 12px;
-  margin-bottom: 12px;
+  margin-top: ${margins.medium};
+  margin-bottom: ${margins.medium};
 `;

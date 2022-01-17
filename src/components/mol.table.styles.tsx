@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors, margins } from 'global-styles';
 
 export const StyledWrapper = styled.div`
   width: 100%;
@@ -9,8 +10,8 @@ export const StyledHeader = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  background-color: rgb(162, 162, 162);
-  margin: 5px;
+  background-color: ${colors.primary};
+  margin: ${margins.small};
   width: 100%;
 `;
 
@@ -19,8 +20,8 @@ export const StyledRow = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-  background-color: rgb(198, 198, 198);
-  margin: 5px;
+  background-color: ${colors.secondary};
+  margin: ${margins.small};
   width: 100%;
   ${(props) => props.onClick && `cursor: pointer;`}
 `;
@@ -28,6 +29,6 @@ export const StyledRow = styled.div`
 export const StyledItem = styled.div`
   display: flex;
   justify-content: flex-start;
-  margin: 8px;
+  margin: ${margins.small};
   width: 100%;
 `;

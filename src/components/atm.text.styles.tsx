@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors, margins, fontSizes, fontWeights } from 'global-styles';
 
 const handleType = (name: string | undefined) => {
   switch (name) {
@@ -18,51 +19,51 @@ const handleType = (name: string | undefined) => {
 };
 
 const StyledTitle = `
-  font-size: 24px;
-  font-weight: bold;
-  color: black;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  font-size: ${fontSizes.large};
+  font-weight: ${fontWeights.bold};
+  color: ${colors.black};
+  margin-top: ${margins.large};
+  margin-bottom: ${margins.large};
   margin-left: 0px;
   margin-right: 0px;
 `;
 
 const StyledNormal = `
-  font-size: 16px;
-  font-weight: bold;
-  color: gray;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  font-size: ${fontSizes.medium};
+  font-weight: ${fontWeights.bold};
+  color: ${colors.gray};
+  margin-top: ${margins.medium};
+  margin-bottom: ${margins.medium};
   margin-left: 0px;
   margin-right: 0px;
 `;
 
 const StyledLabel = `
-  font-size: 12px;
-  font-weight: regular;
-  color: gray;
-  margin-top: 6px;
-  margin-bottom: 6px;
+  font-size: ${fontSizes.small};
+  font-weight: ${fontWeights.regular};
+  color: ${colors.gray};
+  margin-top: ${margins.small};
+  margin-bottom: ${margins.small};
   margin-left: 0px;
   margin-right: 0px;
 `;
 
 const StyledError = `
-  font-size: 12px;
-  font-weight: bold;
-  color: red;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  font-size: ${fontSizes.small};
+  font-weight: ${fontWeights.bold};
+  color: ${colors.error};
+  margin-top: ${margins.small};
+  margin-bottom: ${margins.small};
   margin-left: 0px;
   margin-right: 0px;
 `;
 
 const StyledSuccess = `
-  font-size: 12px;
-  font-weight: bold;
-  color: green;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  font-size: ${fontSizes.small};
+  font-weight: ${fontWeights.bold};
+  color: ${colors.success};
+  margin-top: ${margins.small};
+  margin-bottom: ${margins.small};
   margin-left: 0px;
   margin-right: 0px;
 `;

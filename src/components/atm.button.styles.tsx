@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { colors, margins, boxHeights, fontSizes, fontWeights } from 'global-styles';
 
 export const StyledButton = styled.button`
   display: grid;
@@ -6,12 +7,12 @@ export const StyledButton = styled.button`
   align-items: center;
   cursor: pointer;
   width: 100%;
-  margin-top: 4px;
-  margin-bottom: 4px;
+  margin-top: ${margins.medium};
+  margin-bottom: ${margins.medium};
   margin-left: 0px;
   margin-right: 0px;
-  height: 44px;
-  background-color: rgb(97, 62, 181);
+  height: ${boxHeights.button};
+  background-color: ${colors.callToAction};
 `;
 
 export const StyledSpinnerWrapper = styled.div`
@@ -20,7 +21,7 @@ export const StyledSpinnerWrapper = styled.div`
 
 export const StyledLabelWrapper = styled.div`
   grid-column: 2;
-  font-size: 16px;
-  font-weight: regular;
+  font-size: ${fontSizes.medium};
+  font-weight: ${fontWeights.regular};
   color: white;
 `;
