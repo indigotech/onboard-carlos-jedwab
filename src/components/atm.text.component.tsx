@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { StyledText } from './atm.text.styles';
+import { StyledText, TextNameType } from './atm.text.styles';
 
 interface TextProps {
-  type: 'title' | 'normal' | 'label' | 'error' | 'success';
+  type: TextNameType;
   children: string | string[];
 }
 

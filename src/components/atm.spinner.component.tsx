@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { StyledAnimation } from './atm.spinner.styles';
+import { StyledAnimation, SpinnerSizeType } from './atm.spinner.styles';
 
 interface SpinnerProps {
-  size?: 'small' | 'medium' | 'large';
+  size?: SpinnerSizeType;
 }
 
 export const Spinner = (props: SpinnerProps) => {

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
 
-export const StyledWrapper = styled.div`
+export const InfiniteScrollWrapperStyled = styled.div`
   width: 100%;
 `;

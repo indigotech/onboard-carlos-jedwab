@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import { colors, margins, boxHeights, fontSizes, fontWeights } from 'global-styles';
 
+export type ButtonType = 'button' | 'submit' | 'reset';
+
 export const StyledButton = styled.button`
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

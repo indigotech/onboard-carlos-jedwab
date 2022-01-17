@@ -1,23 +1,6 @@
 import styled from 'styled-components';
 import { colors, margins, fontSizes, fontWeights } from 'global-styles';
 
-const handleType = (name: string | undefined) => {
-  switch (name) {
-    case 'title':
-      return StyledTitle;
-    case 'normal':
-      return StyledNormal;
-    case 'label':
-      return StyledLabel;
-    case 'error':
-      return StyledError;
-    case 'success':
-      return StyledSuccess;
-    default:
-      return StyledNormal;
-  }
-};
-
 const StyledTitle = `
   font-size: ${fontSizes.large};
   font-weight: ${fontWeights.bold};
@@ -68,7 +51,17 @@ const StyledSuccess = `
   margin-right: 0px;
 `;
 
+export type TextNameType = 'title' | 'normal' | 'label' | 'error' | 'success';
+
+const type: Record<TextNameType, string> = {
+  title: StyledTitle,
+  normal: StyledNormal,
+  label: StyledLabel,
+  error: StyledError,
+  success: StyledSuccess,
+};
+
 export const StyledText = styled.text`
-  ${({ name }) => handleType(name)};
+  ${({ name }) => type[name as TextNameType] ?? name};
   text-align: center;
 `;

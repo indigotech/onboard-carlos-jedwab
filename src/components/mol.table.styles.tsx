@@ -15,6 +15,8 @@ export const StyledHeader = styled.div`
   width: 100%;
 `;
 
+export type ItemType = 'button' | 'text';
+
 export const StyledRow = styled.div`
   display: flex;
   flex-direction: row;
@@ -23,7 +25,7 @@ export const StyledRow = styled.div`
   background-color: ${colors.secondary};
   margin: ${margins.small};
   width: 100%;
-  ${(props) => props.onClick && `cursor: pointer;`}
+  ${(props) => props.itemType === 'button' && `cursor: pointer;`}
 `;
 
 export const StyledItem = styled.div`

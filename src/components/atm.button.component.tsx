@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { StyledButton, StyledSpinnerWrapper, StyledLabelWrapper } from './atm.button.styles';
+import { ButtonType, StyledButton, StyledSpinnerWrapper, StyledLabelWrapper } from './atm.button.styles';
 import { Spinner } from './atm.spinner.component';
 
 interface ButtonProps {
   label: string;
-  type?: 'button' | 'submit' | 'reset';
+  type?: ButtonType;
   isLoading?: boolean;
   onClick?: () => void;
 }

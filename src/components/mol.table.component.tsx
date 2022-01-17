@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Text } from './atm.text.component';
-import { StyledWrapper, StyledHeader, StyledRow, StyledItem } from './mol.table.styles';
+import { StyledWrapper, StyledHeader, StyledRow, StyledItem, ItemType } from './mol.table.styles';
 
 interface TableProps {
   header: string[];
@@ -10,7 +10,8 @@ interface TableProps {
 }
 
 export const Table = (props: TableProps) => {
-  const { onClickItem } = props;
+  const rowType: ItemType = props.onClickItem ? 'button' : 'text';
+
   return (
     <StyledWrapper>
       <StyledHeader>
@@ -22,7 +23,7 @@ export const Table = (props: TableProps) => {
       </StyledHeader>
 
       {props.rows.map((row, i) => (
-        <StyledRow key={i} onClick={onClickItem ? () => onClickItem(i) : undefined}>
+        <StyledRow key={i} onClick={() => props.onClickItem?.(i)} itemType={rowType}>
           {row.map((item, j) => (
             <StyledItem key={j}>
               <Text type={'normal'}>{item}</Text>
