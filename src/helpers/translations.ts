@@ -7,6 +7,7 @@ export const translations = {
       smallPassword: 'A senha deve ter no mínimo 7 caracteres',
       simplePassword: 'A senha deve ter letras e números',
       invalidCredentials: 'Email ou senha inválidos, por favor tente novamente',
+      unauthorized: 'Usuário sem credenciais válidas',
       unknownError: 'Ocorreu um erro inesperado, por favor tente novamente',
       missingPhone: 'O telefone deve ser fornecido',
       invalidPhone: 'Formato de telefone inválido',
@@ -32,6 +33,7 @@ export const translations = {
       password: 'Senha',
       role: 'Função',
       submit: 'Cadastrar',
+      userCreated: 'Usuário criado com sucesso!',
     },
   },
 };

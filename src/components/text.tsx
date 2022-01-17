@@ -2,7 +2,7 @@ import React from 'react';
 import './style.css';
 
 interface TextProps {
-  type: 'header' | 'label' | 'error' | 'button';
+  type: 'header' | 'label' | 'error' | 'success' | 'button';
   children: string | string[];
 }
 
