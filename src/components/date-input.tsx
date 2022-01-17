@@ -2,9 +2,8 @@ import React from 'react';
 import './style.css';
 
 import { Text } from './text';
-
-import { toDate, parseDate } from '../helpers/formatting';
-import { isDate } from '../helpers/validations';
+import { toDate, parseDate } from 'helpers/formatting';
+import { isDate } from 'helpers/validations';
 
 interface DateInputProps {
   label: string;
