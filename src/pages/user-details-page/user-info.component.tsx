@@ -39,7 +39,13 @@ export const UserInfo = (props: UserInfoProps) => {
     }
   };
 
-  const { loading } = useUser(props.id, handleCompleted, handleError);
+  const { user, loading } = useUser(props.id, handleError);
+
+  React.useEffect(() => {
+    if (user) {
+      handleCompleted(user);
+    }
+  }, [user]);
 
   return (
     <div className='DetailsPage__table'>
