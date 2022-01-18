@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-import { Text } from 'components/text';
+import { Text } from 'components/atm.text.component';
 import { translations } from 'helpers/translations';
 
 import { UserForms } from './user-forms.component';
@@ -14,8 +14,8 @@ export const FrontPage = () => {
 
   return (
     <div className='FrontPage'>
-      <Text type='header'>{frontPageTranslations.title}</Text>
-      <Text type='label'>{frontPageTranslations.subtitle}</Text>
+      <Text type='title'>{frontPageTranslations.title}</Text>
+      <Text type='normal'>{frontPageTranslations.subtitle}</Text>
 
       {internalError === '' ? (
         <>

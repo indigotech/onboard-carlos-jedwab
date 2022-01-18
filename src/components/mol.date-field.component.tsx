@@ -1,18 +1,19 @@
 import React from 'react';
-import './style.css';
 
-import { Text } from './text';
+import { TextInput } from './atm.text-input.component';
+import { Text } from './atm.text.component';
+import { StyledWrapper, StyledLabelWrapper } from './mol.date-field.styles';
 import { toDate, parseDate } from 'helpers/formatting';
 import { isDate } from 'helpers/validations';
 
-interface DateInputProps {
+interface DateFieldProps {
   label: string;
   name: string;
   value: Date;
   onChange: (date: Date) => void;
 }
 
-export const DateInput = (props: DateInputProps) => {
+export const DateField = (props: DateFieldProps) => {
   const [textDate, setTextDate] = React.useState(parseDate(props.value, { format: 'dd/mm/yyyy' }));
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -31,16 +32,11 @@ export const DateInput = (props: DateInputProps) => {
   };
 
   return (
-    <div className='TextInput'>
-      <Text type='label'>{props.label}</Text>
-      <input
-        className='TextInput__input'
-        type='text'
-        name={props.name}
-        value={textDate}
-        onChange={handleChange}
-        onBlur={handleBlur}
-      />
-    </div>
+    <StyledWrapper>
+      <StyledLabelWrapper>
+        <Text type='label'>{props.label}</Text>
+      </StyledLabelWrapper>
+      <TextInput name={props.name} value={textDate} onChange={handleChange} onBlur={handleBlur} />
+    </StyledWrapper>
   );
 };

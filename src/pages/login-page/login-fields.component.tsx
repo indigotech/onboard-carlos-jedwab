@@ -2,9 +2,9 @@ import React from 'react';
 import './style.css';
 import { useNavigate } from 'react-router-dom';
 
-import { Text } from 'components/text';
-import { TextInput } from 'components/text-input';
-import { Button } from 'components/button';
+import { Text } from 'components/atm.text.component';
+import { TextField } from 'components/mol.text-field.component';
+import { Button } from 'components/atm.button.component';
 import { translations } from 'helpers/translations';
 import { validateEmail, validatePassword } from 'helpers/validations';
 import { useLogin } from 'hooks/use-login';
@@ -71,8 +71,8 @@ export const LoginFields = (props: LoginFieldsProps) => {
 
   return (
     <form onSubmit={onSubmit}>
-      <TextInput label={loginTranslations.email} value={loginForms.email} name='email' onChange={onChange('email')} />
-      <TextInput
+      <TextField label={loginTranslations.email} value={loginForms.email} name='email' onChange={onChange('email')} />
+      <TextField
         label={loginTranslations.password}
         value={loginForms.password}
         name='password'

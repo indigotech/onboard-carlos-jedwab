@@ -1,12 +1,11 @@
 import React from 'react';
 import './style.css';
 
-import { Text } from 'components/text';
-import { Button } from 'components/button';
-import { TextInput } from 'components/text-input';
-import { DateInput } from 'components/date-input';
-import { PhoneInput } from 'components/phone-input';
-import { SelectInput } from 'components/select-input';
+import { Text } from 'components/atm.text.component';
+import { Button } from 'components/atm.button.component';
+import { TextField } from 'components/mol.text-field.component';
+import { DateField } from 'components/mol.date-field.component';
+import { OptionsField } from 'components/mol.options-field.component';
 import { useCreateUser } from 'hooks/use-create-user';
 import { translations } from 'helpers/translations';
 import { validateName, validateEmail, validatePassword, validateDate, validatePhone } from 'helpers/validations';
@@ -95,44 +94,44 @@ export const UserForms = () => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <TextInput
+      <TextField
         label={frontPageTranslations.name}
         value={userForms.name}
         name={'name'}
         onChange={handleChangeText('name')}
       />
 
-      <TextInput
+      <TextField
         label={frontPageTranslations.email}
         value={userForms.email}
         name={'email'}
         onChange={handleChangeText('email')}
       />
 
-      <PhoneInput
+      <TextField
         label={frontPageTranslations.phone}
         value={userForms.phone}
         name={'phone'}
         onChange={handleChangeText('phone')}
+        onlyDigits
       />
 
-      <DateInput
+      <DateField
         label={frontPageTranslations.birthDate}
         value={userForms.birthDate}
         name={'birthDate'}
         onChange={handleChangeDate('birthDate')}
       />
 
-      <TextInput
+      <TextField
         label={frontPageTranslations.password}
         value={userForms.password}
         name={'password'}
         onChange={handleChangeText('password')}
       />
 
-      <SelectInput
+      <OptionsField
         label={frontPageTranslations.role}
-        name={'role'}
         options={Object.values(RoleEnum)}
         value={userForms.role}
         onChange={handleChangeSelect('role')}
